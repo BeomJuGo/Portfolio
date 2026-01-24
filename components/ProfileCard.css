@@ -249,11 +249,10 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: normal;
+  mix-blend-mode: luminosity;
   overflow: visible;
   transform: translateZ(2);
   backface-visibility: hidden;
-  z-index: 2;
 }
 
 .pc-avatar-content .avatar {
@@ -267,8 +266,6 @@
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 120ms ease-out;
-  z-index: 2;
-  object-fit: cover;
 }
 
 .pc-avatar-content::before {
@@ -287,7 +284,7 @@
   bottom: var(--ui-inset);
   left: var(--ui-inset);
   right: var(--ui-inset);
-  z-index: 3;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -351,7 +348,6 @@
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .pc-contact-btn:hover {
