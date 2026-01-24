@@ -122,7 +122,11 @@
 .gooey-nav-container .effect.filter {
   filter: blur(7px) contrast(100) blur(0);
   mix-blend-mode: lighten;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.gooey-nav-container .effect.filter.active {
+  opacity: 1;
 }
 
 .gooey-nav-container .effect.filter::before {
@@ -145,7 +149,7 @@
   border-radius: 100vw;
 }
 
-.gooey-nav-container .effect.active::after {
+.gooey-nav-container .effect.filter.active::after {
   animation: pill 0.3s ease both;
 }
 
