@@ -48,7 +48,7 @@
     transparent var(--behind-glow-size)
   );
   filter: blur(50px) saturate(1.1);
-  opacity: calc(0.8 * var(--card-opacity));
+  opacity: calc(0.4 * var(--card-opacity));
   transition: opacity 200ms ease;
 }
 
@@ -90,7 +90,7 @@
   z-index: 1;
 }
 
-.pc-card * {
+.pc-card > * {
   display: grid;
   grid-area: 1/-1;
   border-radius: var(--card-radius);
@@ -186,7 +186,7 @@
 .pc-card.active .pc-shine::before,
 .pc-card:hover .pc-shine::after,
 .pc-card.active .pc-shine::after {
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .pc-shine::before {
@@ -211,8 +211,8 @@
     center,
     calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
   background-blend-mode: color-dodge;
-  filter: brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2))
-    saturate(calc(0.5 + var(--pointer-from-center)));
+  filter: brightness(calc(1.5 - var(--pointer-from-center) * 0.5)) contrast(calc(1 + var(--pointer-from-center)))
+    saturate(calc(0.5 + var(--pointer-from-center) * 0.3));
   mix-blend-mode: luminosity;
 }
 
@@ -260,6 +260,9 @@
   backface-visibility: hidden;
   will-change: transform;
   transition: transform 120ms ease-out;
+  display: block;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .pc-avatar-content::before {
@@ -310,6 +313,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
+  display: block;
 }
 
 .pc-user-text {
@@ -342,6 +346,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .pc-contact-btn:hover {
