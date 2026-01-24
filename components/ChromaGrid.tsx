@@ -119,10 +119,19 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
 
   const handleCardEnter = (index: number) => {
     const video = videoRefs.current.get(index)
-    if (video && video.paused) {
-      video.play().catch(() => {
-        // Autoplay가 차단된 경우 무시
+    if (video) {
+      // 다른 모든 비디오 일시정지
+      videoRefs.current.forEach((v, i) => {
+        if (i !== index && v && !v.paused) {
+          v.pause()
+        }
       })
+      // 현재 비디오 재생
+      if (video.paused) {
+        video.play().catch(() => {
+          // Autoplay가 차단된 경우 무시
+        })
+      }
     }
   }
 
@@ -137,19 +146,20 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
     if (video) {
       videoRefs.current.set(index, video)
       // 비디오 로드 완료 시 초기 상태 설정
-      video.addEventListener('loadedmetadata', () => {
+      const handleLoadedMetadata = () => {
         video.pause()
         video.currentTime = 0
-      })
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      }
+      if (video.readyState >= 1) {
+        video.pause()
+        video.currentTime = 0
+      } else {
+        video.addEventListener('loadedmetadata', handleLoadedMetadata)
+      }
     } else {
       videoRefs.current.delete(index)
     }
-  }
-
-  const getProjectTypeText = (type?: 'Personal' | 'Team'): string => {
-    if (type === 'Personal') return '개인프로젝트'
-    if (type === 'Team') return '팀프로젝트'
-    return ''
   }
 
   return (
@@ -198,11 +208,6 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
             )}
           </div>
           <footer className="chroma-info">
-            {c.projectType && (
-              <span className={`project-type project-type-${c.projectType.toLowerCase()}`}>
-                {getProjectTypeText(c.projectType)}
-              </span>
-            )}
             <h3 className="name">{c.title}</h3>
             <p className="role">{c.subtitle}</p>
             {c.techStack && c.techStack.length > 0 && (
