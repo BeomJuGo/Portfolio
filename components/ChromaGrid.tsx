@@ -151,6 +151,16 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
         video.currentTime = 0
         video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       }
+      const handleError = (e: Event) => {
+        console.error(`Video loading error for item ${index}:`, e)
+        console.error('Video src:', video.src)
+        console.error('Video error details:', video.error)
+      }
+      const handleCanPlay = () => {
+        console.log(`Video can play for item ${index}:`, video.src)
+      }
+      video.addEventListener('error', handleError)
+      video.addEventListener('canplay', handleCanPlay)
       if (video.readyState >= 1) {
         video.pause()
         video.currentTime = 0
@@ -194,15 +204,48 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
         >
           <div className="chroma-img-wrapper">
             {c.videoUrl ? (
-              <video
-                ref={(el) => setVideoRef(i, el)}
-                src={c.videoUrl}
-                loop
-                muted
-                playsInline
-                className="chroma-video"
-                preload="metadata"
-              />
+              <>
+                <video
+                  ref={(el) => setVideoRef(i, el)}
+                  src={c.videoUrl}
+                  loop
+                  muted
+                  playsInline
+                  className="chroma-video"
+                  preload="auto"
+                  onError={(e) => {
+                    const video = e.currentTarget
+                    console.error(`Video error for ${c.title}:`, {
+                      error: video.error,
+                      networkState: video.networkState,
+                      readyState: video.readyState,
+                      src: video.src,
+                      videoUrl: c.videoUrl
+                    })
+                  }}
+                  onLoadedData={() => {
+                    console.log(`Video loaded for ${c.title}:`, c.videoUrl)
+                  }}
+                  onCanPlay={() => {
+                    console.log(`Video can play for ${c.title}`)
+                  }}
+                />
+                {/* Fallback image */}
+                <img 
+                  src={c.image} 
+                  alt={c.title} 
+                  style={{ 
+                    position: 'absolute', 
+                    top: 0, 
+                    left: 0, 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover',
+                    opacity: 0,
+                    pointerEvents: 'none'
+                  }} 
+                />
+              </>
             ) : (
               <img src={c.image} alt={c.title} loading="lazy" />
             )}
