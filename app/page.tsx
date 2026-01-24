@@ -159,7 +159,7 @@ export default function Home() {
               exit="exit"
               variants={pageVariants}
               transition={pageTransition}
-              className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+              className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm"
             >
               <div className="max-w-7xl mx-auto text-center">
                 <motion.div
@@ -255,7 +255,7 @@ export default function Home() {
               exit="exit"
               variants={pageVariants}
               transition={pageTransition}
-              className="h-screen overflow-y-auto px-4 sm:px-6 lg:px-8 py-20"
+              className="h-screen overflow-y-auto px-4 sm:px-6 lg:px-8 py-20 bg-background/40 backdrop-blur-sm"
             >
               <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12">
@@ -377,7 +377,7 @@ export default function Home() {
               exit="exit"
               variants={pageVariants}
               transition={pageTransition}
-              className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+              className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm"
             >
               <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-4xl font-bold text-foreground mb-4">연락하기</h2>
