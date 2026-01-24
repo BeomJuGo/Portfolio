@@ -11,12 +11,13 @@ import {
   FaTools,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
+import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
 
 type Page = 'home' | 'about' | 'projects'
 
@@ -45,18 +46,22 @@ export default function Home() {
     { name: 'Python', level: 75 },
   ]
 
-  const projects = [
+  const projects: ChromaItem[] = [
     {
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
       title: 'Health-site',
-      description: '건강 관련 웹사이트 프로젝트',
-      tech: ['JavaScript', 'React'],
-      link: 'https://github.com/BeomJuGo/Health-site',
+      subtitle: '건강 관련 웹사이트 프로젝트',
+      borderColor: '#4F46E5',
+      gradient: 'linear-gradient(145deg, #4F46E5, #000)',
+      url: 'https://github.com/BeomJuGo/Health-site',
     },
     {
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
       title: 'PC Site',
-      description: 'PC 관련 풀스택 프로젝트',
-      tech: ['JavaScript', 'React', 'Node.js'],
-      link: 'https://github.com/BeomJuGo/pc-site-frontend',
+      subtitle: 'PC 관련 풀스택 프로젝트',
+      borderColor: '#10B981',
+      gradient: 'linear-gradient(210deg, #10B981, #000)',
+      url: 'https://github.com/BeomJuGo/pc-site-frontend',
     },
   ]
 
@@ -251,21 +256,25 @@ export default function Home() {
                       </CardContent>
                     </Card>
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
+                      <CardHeader>
+                        <CardTitle>개인 정보</CardTitle>
+                        <CardDescription>기본 정보</CardDescription>
+                      </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Name</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이름:</span>
                           <span className="text-sm text-foreground">{personalInfo.name}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Birth</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">생년월일:</span>
                           <span className="text-sm text-foreground">{personalInfo.birthDate}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Adress</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">주거지:</span>
                           <span className="text-sm text-foreground">{personalInfo.address}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Email</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이메일:</span>
                           <a 
                             href={`mailto:${personalInfo.email}`}
                             className="text-sm text-primary hover:underline"
@@ -343,52 +352,13 @@ export default function Home() {
                   <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {projects.map((project, index) => (
-                    <motion.div
-                      key={project.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.2 }}
-                      whileHover={{ y: -8 }}
-                    >
-                      <Card className="border-2 hover:border-primary/50 transition-all h-full flex flex-col bg-background/80 backdrop-blur-sm">
-                        <CardHeader>
-                          <div className="flex items-center gap-3">
-                            <div className="p-2 bg-primary/10 rounded-lg">
-                              <FaCode className="text-primary" size={20} />
-                            </div>
-                            <CardTitle className="text-2xl">{project.title}</CardTitle>
-                          </div>
-                          <CardDescription className="text-base mt-2">
-                            {project.description}
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent className="flex-grow">
-                          <div className="flex flex-wrap gap-2">
-                            {project.tech.map((tech) => (
-                              <Badge key={tech} variant="secondary">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </CardContent>
-                        <CardFooter>
-                          <Button asChild variant="outline" className="w-full">
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2"
-                            >
-                              <FaGithub />
-                              GitHub에서 보기
-                            </a>
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    </motion.div>
-                  ))}
+                <div className="min-h-[600px]">
+                  <ChromaGrid
+                    items={projects}
+                    columns={2}
+                    rows={1}
+                    radius={300}
+                  />
                 </div>
               </div>
             </motion.div>
