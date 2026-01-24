@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
+import ProfileCard from '@/components/ProfileCard'
 
 type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 
@@ -215,24 +216,17 @@ export default function Home() {
               transition={pageTransition}
               className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm"
             >
-              <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                  <Badge variant="outline" className="mb-4">
-                    <FaUser className="mr-2" />
-                    소개
-                  </Badge>
-                  <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
-                  <Separator className="mx-auto w-24 mb-6" />
-                  <Card className="max-w-3xl mx-auto border-2 bg-background/80 backdrop-blur-sm">
-                    <CardContent className="pt-6">
-                      <p className="text-muted-foreground text-lg leading-relaxed">
-                        풀스택 개발자로서 프론트엔드와 백엔드 개발에 열정을 가지고 있습니다.
-                        사용자 경험을 중시하며, 최신 기술을 활용하여 효율적이고 확장 가능한 웹 애플리케이션을 개발합니다.
-                        코드 품질과 성능 최적화에 관심이 많으며, 지속적으로 학습하고 성장하는 것을 즐깁니다.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
+              <div className="max-w-7xl mx-auto w-full flex justify-center">
+                <ProfileCard
+                  avatarUrl="/profile.jpg"
+                  name="고범주"
+                  title="풀스택 개발자"
+                  handle="BeomJuGo"
+                  status="Online"
+                  contactText="연락하기"
+                  showUserInfo={true}
+                  onContactClick={() => setCurrentPage('contact')}
+                />
               </div>
             </motion.div>
           )}
