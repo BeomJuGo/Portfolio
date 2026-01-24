@@ -228,7 +228,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                   <div className="flex justify-center">
                     <ProfileCard
-                      avatarUrl="/profile.jpg"
+                      avatarUrl="/profile.png"
                       name="고범주"
                       title="풀스택 개발자"
                       handle="BeomJuGo"
