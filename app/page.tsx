@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
 import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
@@ -24,6 +25,13 @@ type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [currentPage, setCurrentPage] = useState<Page>('home')
+  const [personalInfo, setPersonalInfo] = useState({
+    name: '',
+    birthDate: '',
+    address: '',
+    email: '',
+    university: ''
+  })
 
   useEffect(() => {
     setMounted(true)
@@ -71,6 +79,13 @@ export default function Home() {
     { label: '프로젝트', onClick: () => setCurrentPage('projects') },
     { label: '연락', onClick: () => setCurrentPage('contact') },
   ]
+
+  const handleInputChange = (field: string, value: string) => {
+    setPersonalInfo(prev => ({
+      ...prev,
+      [field]: value
+    }))
+  }
 
   if (!mounted) return null
 
@@ -238,7 +253,7 @@ export default function Home() {
                       onContactClick={() => setCurrentPage('contact')}
                     />
                   </div>
-                  <div className="flex items-center">
+                  <div className="space-y-6">
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
                       <CardContent className="pt-6">
                         <p className="text-muted-foreground text-lg leading-relaxed">
@@ -246,6 +261,78 @@ export default function Home() {
                           사용자 경험을 중시하며, 최신 기술을 활용하여 효율적이고 확장 가능한 웹 애플리케이션을 개발합니다.
                           코드 품질과 성능 최적화에 관심이 많으며, 지속적으로 학습하고 성장하는 것을 즐깁니다.
                         </p>
+                      </CardContent>
+                    </Card>
+                    <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
+                      <CardHeader>
+                        <CardTitle>개인 정보</CardTitle>
+                        <CardDescription>기본 정보를 입력해주세요</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="space-y-2">
+                          <label htmlFor="name" className="text-sm font-medium text-foreground">
+                            이름
+                          </label>
+                          <Input
+                            id="name"
+                            type="text"
+                            placeholder="이름을 입력하세요"
+                            value={personalInfo.name}
+                            onChange={(e) => handleInputChange('name', e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label htmlFor="birthDate" className="text-sm font-medium text-foreground">
+                            생년월일
+                          </label>
+                          <Input
+                            id="birthDate"
+                            type="date"
+                            value={personalInfo.birthDate}
+                            onChange={(e) => handleInputChange('birthDate', e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label htmlFor="address" className="text-sm font-medium text-foreground">
+                            주거지
+                          </label>
+                          <Input
+                            id="address"
+                            type="text"
+                            placeholder="주소를 입력하세요"
+                            value={personalInfo.address}
+                            onChange={(e) => handleInputChange('address', e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label htmlFor="email" className="text-sm font-medium text-foreground">
+                            이메일
+                          </label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="이메일을 입력하세요"
+                            value={personalInfo.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label htmlFor="university" className="text-sm font-medium text-foreground">
+                            대학교
+                          </label>
+                          <Input
+                            id="university"
+                            type="text"
+                            placeholder="대학교를 입력하세요"
+                            value={personalInfo.university}
+                            onChange={(e) => handleInputChange('university', e.target.value)}
+                            className="bg-background/50"
+                          />
+                        </div>
                       </CardContent>
                     </Card>
                   </div>
