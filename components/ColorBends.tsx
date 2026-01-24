@@ -294,16 +294,20 @@ export default function ColorBends({
     const container = containerRef.current
     if (!material || !container) return
 
-    const handlePointerMove = (e: PointerEvent) => {
+    const handlePointerMove = (e: PointerEvent | MouseEvent) => {
       const rect = container.getBoundingClientRect()
       const x = ((e.clientX - rect.left) / (rect.width || 1)) * 2 - 1
       const y = -(((e.clientY - rect.top) / (rect.height || 1)) * 2 - 1)
       pointerTargetRef.current.set(x, y)
     }
 
-    container.addEventListener('pointermove', handlePointerMove)
+    // Use window-level event listener for better tracking
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('mousemove', handlePointerMove)
+    
     return () => {
-      container.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('mousemove', handlePointerMove)
     }
   }, [])
 
