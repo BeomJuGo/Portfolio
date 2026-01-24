@@ -14,6 +14,7 @@ export interface ChromaItem {
   gradient?: string
   detailPageId?: string
   url?: string
+  projectType?: 'Personal' | 'Team'
 }
 
 export interface ChromaGridProps {
@@ -186,6 +187,11 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
             )}
           </div>
           <footer className="chroma-info">
+            {c.projectType && (
+              <span className={`project-type project-type-${c.projectType.toLowerCase()}`}>
+                {c.projectType} Project
+              </span>
+            )}
             <h3 className="name">{c.title}</h3>
             <p className="role">{c.subtitle}</p>
             {c.techStack && c.techStack.length > 0 && (
