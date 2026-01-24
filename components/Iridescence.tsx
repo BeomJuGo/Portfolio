@@ -41,17 +41,21 @@ export default function Iridescence({
     canvas.style.width = '100%'
     canvas.style.height = '100%'
     canvas.style.pointerEvents = 'none'
-    canvas.style.zIndex = '-1'
+    canvas.style.zIndex = '0'
     canvasRef.current = canvas
     container.appendChild(canvas)
 
     // Get WebGL context
-    const gl = canvas.getContext('webgl', { alpha: true, antialias: true })
+    const gl = canvas.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: false })
     if (!gl) {
       console.error('WebGL not supported')
       return
     }
     glRef.current = gl
+
+    // Enable blending
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
     // Set canvas size
     const setSize = () => {
@@ -75,7 +79,7 @@ export default function Iridescence({
       }
     `
 
-    // Fragment shader
+    // Fragment shader with brighter, more visible iridescence
     const fragmentShaderSource = `
       precision highp float;
       
@@ -92,8 +96,8 @@ export default function Iridescence({
         vec2 uv = v_uv;
         
         // Mouse interaction
-        vec2 mouse = u_mouse * 0.5;
-        uv += mouse * 0.1;
+        vec2 mouse = u_mouse * 0.3;
+        uv += mouse * 0.15;
         
         // Create iridescence effect
         vec2 center = vec2(0.5, 0.5);
@@ -104,26 +108,28 @@ export default function Iridescence({
         // Time-based animation
         float t = u_time * u_speed;
         
-        // Iridescence calculation
-        float iridescence = sin(angle * 3.0 + radius * 10.0 + t) * 0.5 + 0.5;
-        iridescence = pow(iridescence, 1.5);
+        // Iridescence calculation - more pronounced
+        float iridescence = sin(angle * 4.0 + radius * 12.0 + t * 0.5) * 0.5 + 0.5;
+        iridescence = pow(iridescence, 1.2);
         
-        // Color mixing
-        vec3 baseColor = u_color;
+        // Brighter color mixing
+        vec3 baseColor = u_color * 1.5;
         vec3 iridescentColor = vec3(
           sin(iridescence * 3.14159 + 0.0) * 0.5 + 0.5,
           sin(iridescence * 3.14159 + 2.094) * 0.5 + 0.5,
           sin(iridescence * 3.14159 + 4.189) * 0.5 + 0.5
         );
+        iridescentColor *= 1.8;
         
-        vec3 finalColor = mix(baseColor, iridescentColor, iridescence * u_amplitude);
+        vec3 finalColor = mix(baseColor, iridescentColor, iridescence * u_amplitude * 2.0);
         
-        // Add some glow
-        float glow = 1.0 - radius * 1.5;
+        // Add radial glow
+        float glow = 1.0 - radius * 1.2;
         glow = max(0.0, glow);
-        finalColor += glow * 0.2;
+        finalColor += glow * 0.3;
         
-        gl_FragColor = vec4(finalColor, 0.4);
+        // Make it more visible with higher alpha
+        gl_FragColor = vec4(finalColor, 0.7);
       }
     `
 
@@ -182,6 +188,11 @@ export default function Iridescence({
     const amplitudeLocation = gl.getUniformLocation(program, 'u_amplitude')
     const speedLocation = gl.getUniformLocation(program, 'u_speed')
     const resolutionLocation = gl.getUniformLocation(program, 'u_resolution')
+
+    // Set initial resolution
+    if (resolutionLocation) {
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height)
+    }
 
     // Handle resize
     const handleResize = () => {
@@ -247,7 +258,7 @@ export default function Iridescence({
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10"
+      className="fixed inset-0 z-0"
     />
   )
 }
