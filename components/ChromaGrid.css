@@ -77,14 +77,29 @@
   box-sizing: border-box;
   background: transparent;
   transition: background 0.3s ease;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.chroma-img-wrapper img {
+.chroma-img-wrapper img,
+.chroma-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
   display: block;
+}
+
+.chroma-video {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
 }
 
 .chroma-info {
@@ -93,15 +108,41 @@
   padding: 0.75rem 1rem;
   color: #fff;
   font-family: system-ui, sans-serif;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 0.25rem;
-  column-gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.chroma-info .role,
-.chroma-info .handle {
+.chroma-info .name {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.chroma-info .role {
+  margin: 0;
   color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #fff;
+  backdrop-filter: blur(10px);
 }
 
 .chroma-overlay {
