@@ -52,15 +52,7 @@ export default function Home() {
     },
   ]
 
-  const navItems = [
-    { label: '홈', onClick: () => setCurrentPage('home') },
-    { label: '소개', onClick: () => setCurrentPage('about') },
-    { label: '기술', onClick: () => setCurrentPage('skills') },
-    { label: '프로젝트', onClick: () => setCurrentPage('projects') },
-    { label: '연락', onClick: () => setCurrentPage('contact') },
-  ]
-
-  const getActiveIndex = () => {
+  const getActiveIndex = (): number => {
     const pageMap: Record<Page, number> = {
       'home': 0,
       'about': 1,
@@ -70,6 +62,14 @@ export default function Home() {
     }
     return pageMap[currentPage]
   }
+
+  const navItems = [
+    { label: '홈', onClick: () => setCurrentPage('home') },
+    { label: '소개', onClick: () => setCurrentPage('about') },
+    { label: '기술', onClick: () => setCurrentPage('skills') },
+    { label: '프로젝트', onClick: () => setCurrentPage('projects') },
+    { label: '연락', onClick: () => setCurrentPage('contact') },
+  ]
 
   if (!mounted) return null
 
@@ -130,8 +130,8 @@ export default function Home() {
             >
               <GooeyNav
                 items={navItems}
+                activeIndex={getActiveIndex()}
                 initialActiveIndex={getActiveIndex()}
-                key={currentPage}
               />
             </motion.div>
           </div>
