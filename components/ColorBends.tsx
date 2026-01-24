@@ -131,7 +131,7 @@ export default function ColorBends({
       uniform float u_time;
       uniform float u_speed;
       uniform float u_frequency;
-      uniform vec3 u_colors[${colors.length}];
+      uniform vec3 u_colors[3];
       uniform float u_parallax;
       
       varying vec2 vUv;
@@ -142,12 +142,12 @@ export default function ColorBends({
         
         // Create color gradient based on position and time
         float t = u_time * u_speed;
-        float gradient = sin(uv.x * ${frequency} + uv.y * ${frequency} + t) * 0.5 + 0.5;
+        float gradient = sin(uv.x * u_frequency + uv.y * u_frequency + t) * 0.5 + 0.5;
         
         // Mix colors based on gradient
         vec3 color1 = u_colors[0];
         vec3 color2 = u_colors[1];
-        vec3 color3 = u_colors[${colors.length > 2 ? 2 : 1}];
+        vec3 color3 = u_colors[2];
         
         vec3 finalColor;
         if (gradient < 0.5) {
