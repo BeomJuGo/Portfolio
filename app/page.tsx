@@ -16,6 +16,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import ColorBends from '@/components/ColorBends'
+import GooeyNav from '@/components/GooeyNav'
 
 type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 
@@ -51,6 +52,25 @@ export default function Home() {
     },
   ]
 
+  const navItems = [
+    { label: '홈', onClick: () => setCurrentPage('home') },
+    { label: '소개', onClick: () => setCurrentPage('about') },
+    { label: '기술', onClick: () => setCurrentPage('skills') },
+    { label: '프로젝트', onClick: () => setCurrentPage('projects') },
+    { label: '연락', onClick: () => setCurrentPage('contact') },
+  ]
+
+  const getActiveIndex = () => {
+    const pageMap: Record<Page, number> = {
+      'home': 0,
+      'about': 1,
+      'skills': 2,
+      'projects': 3,
+      'contact': 4,
+    }
+    return pageMap[currentPage]
+  }
+
   if (!mounted) return null
 
   const pageVariants = {
@@ -81,6 +101,17 @@ export default function Home() {
         autoRotate={0}
       />
       
+      {/* SVG Filter for Gooey Effect */}
+      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+        <defs>
+          <filter id="gooey">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="gooey" />
+            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,53 +127,12 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex space-x-2"
             >
-              <Button
-                variant={currentPage === 'home' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentPage('home')}
-                className="gap-2"
-              >
-                <FaHome />
-                홈
-              </Button>
-              <Button
-                variant={currentPage === 'about' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentPage('about')}
-                className="gap-2"
-              >
-                <FaUser />
-                소개
-              </Button>
-              <Button
-                variant={currentPage === 'skills' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentPage('skills')}
-                className="gap-2"
-              >
-                <FaTools />
-                기술
-              </Button>
-              <Button
-                variant={currentPage === 'projects' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentPage('projects')}
-                className="gap-2"
-              >
-                <FaCode />
-                프로젝트
-              </Button>
-              <Button
-                variant={currentPage === 'contact' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentPage('contact')}
-                className="gap-2"
-              >
-                <FaEnvelope />
-                연락
-              </Button>
+              <GooeyNav
+                items={navItems}
+                initialActiveIndex={getActiveIndex()}
+                key={currentPage}
+              />
             </motion.div>
           </div>
         </div>
