@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
-  "installCommand": "npm install && git lfs pull || true",
+  "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["icn1"]
 }
