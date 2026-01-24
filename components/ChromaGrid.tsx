@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import './ChromaGrid.css'
 
@@ -119,7 +119,7 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
 
   const handleCardEnter = (index: number) => {
     const video = videoRefs.current.get(index)
-    if (video) {
+    if (video && video.paused) {
       video.play().catch(() => {
         // Autoplay가 차단된 경우 무시
       })
@@ -128,7 +128,7 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
 
   const handleCardLeave = (index: number) => {
     const video = videoRefs.current.get(index)
-    if (video) {
+    if (video && !video.paused) {
       video.pause()
     }
   }
@@ -136,9 +136,20 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
   const setVideoRef = (index: number, video: HTMLVideoElement | null) => {
     if (video) {
       videoRefs.current.set(index, video)
+      // 비디오 로드 완료 시 초기 상태 설정
+      video.addEventListener('loadedmetadata', () => {
+        video.pause()
+        video.currentTime = 0
+      })
     } else {
       videoRefs.current.delete(index)
     }
+  }
+
+  const getProjectTypeText = (type?: 'Personal' | 'Team'): string => {
+    if (type === 'Personal') return '개인프로젝트'
+    if (type === 'Team') return '팀프로젝트'
+    return ''
   }
 
   return (
@@ -189,7 +200,7 @@ export const ChromaGrid: React.FC<ChromaGridProps> = ({
           <footer className="chroma-info">
             {c.projectType && (
               <span className={`project-type project-type-${c.projectType.toLowerCase()}`}>
-                {c.projectType} Project
+                {getProjectTypeText(c.projectType)}
               </span>
             )}
             <h3 className="name">{c.title}</h3>
