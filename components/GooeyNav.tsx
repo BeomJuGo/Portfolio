@@ -18,6 +18,8 @@ export interface GooeyNavProps {
   timeVariance?: number
   colors?: number[]
   initialActiveIndex?: number
+  activeIndex?: number
+  onActiveIndexChange?: (index: number) => void
 }
 
 const GooeyNav: React.FC<GooeyNavProps> = ({
@@ -28,13 +30,18 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   particleR = 100,
   timeVariance = 300,
   colors = [1, 2, 3, 1, 2, 3, 1, 4],
-  initialActiveIndex = 0
+  initialActiveIndex = 0,
+  activeIndex: externalActiveIndex,
+  onActiveIndexChange
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const navRef = useRef<HTMLUListElement>(null)
   const filterRef = useRef<HTMLSpanElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
-  const [activeIndex, setActiveIndex] = useState<number>(initialActiveIndex)
+  const [internalActiveIndex, setInternalActiveIndex] = useState<number>(initialActiveIndex)
+  
+  // Use external activeIndex if provided, otherwise use internal state
+  const activeIndex = externalActiveIndex !== undefined ? externalActiveIndex : internalActiveIndex
 
   const noise = (n = 1) => n / 2 - Math.random() * n
 
@@ -117,7 +124,14 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const liEl = e.currentTarget.parentElement as HTMLElement
     if (activeIndex === index || !liEl) return
 
-    setActiveIndex(index)
+    const newIndex = index
+    if (externalActiveIndex === undefined) {
+      setInternalActiveIndex(newIndex)
+    }
+    if (onActiveIndexChange) {
+      onActiveIndexChange(newIndex)
+    }
+    
     updateEffectPosition(liEl)
 
     if (filterRef.current) {
