@@ -71,7 +71,6 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     for (let i = 0; i < particleCount; i++) {
       const t = animationTime * 2 + noise(timeVariance * 2)
       const p = createParticle(i, t, d, r)
-      element.classList.remove('active')
 
       setTimeout(() => {
         const particle = document.createElement('span')
@@ -87,11 +86,10 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
         particle.style.setProperty('--rotate', `${p.rotate}deg`)
 
         point.classList.add('point')
+        point.style.setProperty('--color', `var(--color-${p.color}, white)`)
         particle.appendChild(point)
         element.appendChild(particle)
-        requestAnimationFrame(() => {
-          element.classList.add('active')
-        })
+        
         setTimeout(() => {
           try {
             element.removeChild(particle)
@@ -99,7 +97,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
             // Do nothing
           }
         }, t)
-      }, 30)
+      }, 30 * i)
     }
   }
 
@@ -153,6 +151,9 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     }
 
     if (filterRef.current) {
+      filterRef.current.classList.remove('active')
+      void filterRef.current.offsetWidth
+      filterRef.current.classList.add('active')
       makeParticles(filterRef.current)
     }
 
@@ -182,7 +183,12 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
     const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLElement
     if (activeLi) {
       updateEffectPosition(activeLi)
-      textRef.current?.classList.add('active')
+      if (textRef.current) {
+        textRef.current.classList.add('active')
+      }
+      if (filterRef.current) {
+        filterRef.current.classList.add('active')
+      }
     }
 
     const resizeObserver = new ResizeObserver(() => {
