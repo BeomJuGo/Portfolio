@@ -15,7 +15,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { Input } from '@/components/ui/input'
 import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
@@ -25,17 +24,18 @@ type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [currentPage, setCurrentPage] = useState<Page>('home')
-  const [personalInfo, setPersonalInfo] = useState({
-    name: '',
-    birthDate: '',
-    address: '',
-    email: '',
-    university: ''
-  })
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const personalInfo = {
+    name: '고범주',
+    birthDate: '1998.10.29',
+    address: '경기도 용인시',
+    email: 'lom0097@naver.com',
+    university: '강남대학교 소프트웨어 전공'
+  }
 
   const skills = [
     { name: 'JavaScript', level: 90 },
@@ -79,13 +79,6 @@ export default function Home() {
     { label: '프로젝트', onClick: () => setCurrentPage('projects') },
     { label: '연락', onClick: () => setCurrentPage('contact') },
   ]
-
-  const handleInputChange = (field: string, value: string) => {
-    setPersonalInfo(prev => ({
-      ...prev,
-      [field]: value
-    }))
-  }
 
   if (!mounted) return null
 
@@ -266,72 +259,33 @@ export default function Home() {
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
                       <CardHeader>
                         <CardTitle>개인 정보</CardTitle>
-                        <CardDescription>기본 정보를 입력해주세요</CardDescription>
+                        <CardDescription>기본 정보</CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                          <label htmlFor="name" className="text-sm font-medium text-foreground">
-                            이름
-                          </label>
-                          <Input
-                            id="name"
-                            type="text"
-                            placeholder="이름을 입력하세요"
-                            value={personalInfo.name}
-                            onChange={(e) => handleInputChange('name', e.target.value)}
-                            className="bg-background/50"
-                          />
+                        <div className="flex items-start gap-4">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이름:</span>
+                          <span className="text-sm text-foreground">{personalInfo.name}</span>
                         </div>
-                        <div className="space-y-2">
-                          <label htmlFor="birthDate" className="text-sm font-medium text-foreground">
-                            생년월일
-                          </label>
-                          <Input
-                            id="birthDate"
-                            type="date"
-                            value={personalInfo.birthDate}
-                            onChange={(e) => handleInputChange('birthDate', e.target.value)}
-                            className="bg-background/50"
-                          />
+                        <div className="flex items-start gap-4">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">생년월일:</span>
+                          <span className="text-sm text-foreground">{personalInfo.birthDate}</span>
                         </div>
-                        <div className="space-y-2">
-                          <label htmlFor="address" className="text-sm font-medium text-foreground">
-                            주거지
-                          </label>
-                          <Input
-                            id="address"
-                            type="text"
-                            placeholder="주소를 입력하세요"
-                            value={personalInfo.address}
-                            onChange={(e) => handleInputChange('address', e.target.value)}
-                            className="bg-background/50"
-                          />
+                        <div className="flex items-start gap-4">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">주거지:</span>
+                          <span className="text-sm text-foreground">{personalInfo.address}</span>
                         </div>
-                        <div className="space-y-2">
-                          <label htmlFor="email" className="text-sm font-medium text-foreground">
-                            이메일
-                          </label>
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="이메일을 입력하세요"
-                            value={personalInfo.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                            className="bg-background/50"
-                          />
+                        <div className="flex items-start gap-4">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이메일:</span>
+                          <a 
+                            href={`mailto:${personalInfo.email}`}
+                            className="text-sm text-primary hover:underline"
+                          >
+                            {personalInfo.email}
+                          </a>
                         </div>
-                        <div className="space-y-2">
-                          <label htmlFor="university" className="text-sm font-medium text-foreground">
-                            대학교
-                          </label>
-                          <Input
-                            id="university"
-                            type="text"
-                            placeholder="대학교를 입력하세요"
-                            value={personalInfo.university}
-                            onChange={(e) => handleInputChange('university', e.target.value)}
-                            className="bg-background/50"
-                          />
+                        <div className="flex items-start gap-4">
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">대학교:</span>
+                          <span className="text-sm text-foreground">{personalInfo.university}</span>
                         </div>
                       </CardContent>
                     </Card>
