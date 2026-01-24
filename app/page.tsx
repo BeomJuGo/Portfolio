@@ -50,11 +50,11 @@ export default function Home() {
   if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/95 relative">
+    <div className="min-h-screen relative bg-transparent">
       <Iridescence
         color={[0.5, 0.6, 0.8]}
         mouseReact
-        amplitude={0.1}
+        amplitude={0.3}
         speed={1}
       />
       
@@ -145,7 +145,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export default function Home() {
             </Badge>
             <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
             <Separator className="mx-auto w-24 mb-6" />
-            <Card className="max-w-3xl mx-auto border-2">
+            <Card className="max-w-3xl mx-auto border-2 bg-background/80 backdrop-blur-sm">
               <CardContent className="pt-6">
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   풀스택 개발자로서 프론트엔드와 백엔드 개발에 열정을 가지고 있습니다.
@@ -197,7 +197,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="border-2 hover:border-primary/50 transition-colors">
+                <Card className="border-2 hover:border-primary/50 transition-colors bg-background/80 backdrop-blur-sm">
                   <CardHeader>
                     <div className="flex justify-between items-center">
                       <CardTitle className="text-lg">{skill.name}</CardTitle>
@@ -223,7 +223,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
+      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -248,7 +248,7 @@ export default function Home() {
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -8 }}
               >
-                <Card className="border-2 hover:border-primary/50 transition-all h-full flex flex-col">
+                <Card className="border-2 hover:border-primary/50 transition-all h-full flex flex-col bg-background/80 backdrop-blur-sm">
                   <CardHeader>
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-primary/10 rounded-lg">
@@ -335,7 +335,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border bg-muted/30 relative z-10">
+      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border bg-background/40 backdrop-blur-sm relative z-10">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
           <p>© 2026 고범주. All rights reserved.</p>
         </div>
