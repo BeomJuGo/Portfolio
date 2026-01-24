@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import Iridescence from '@/components/Iridescence'
+import ColorBends from '@/components/ColorBends'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -51,11 +51,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative bg-transparent">
-      <Iridescence
-        color={[0.5, 0.6, 0.8]}
-        mouseReact
-        amplitude={0.3}
-        speed={1}
+      <ColorBends
+        colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+        rotation={0}
+        speed={0.2}
+        scale={1}
+        frequency={1}
+        warpStrength={1}
+        mouseInfluence={1}
+        parallax={0.5}
+        noise={0.1}
+        transparent
+        autoRotate={0}
+        color=""
       />
       
       {/* Navigation */}
