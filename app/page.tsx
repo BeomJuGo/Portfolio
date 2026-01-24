@@ -79,7 +79,6 @@ export default function Home() {
         noise={0.1}
         transparent
         autoRotate={0}
-        color=""
       />
       
       {/* Navigation */}
