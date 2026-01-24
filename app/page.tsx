@@ -115,6 +115,9 @@ export default function Home() {
     },
   ]
 
+  const teamProjects = projects.filter(p => p.projectType === 'Team')
+  const personalProjects = projects.filter(p => p.projectType === 'Personal')
+
   const getActiveIndex = (): number => {
     const pageMap: Record<Page, number> = {
       'home': 0,
@@ -412,14 +415,35 @@ export default function Home() {
                   <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
-                <div className="min-h-[600px]">
-                  <ChromaGrid
-                    items={projects}
-                    columns={1}
-                    rows={2}
-                    radius={300}
-                    onCardClick={handleProjectClick}
-                  />
+                <div className="space-y-16">
+                  {teamProjects.length > 0 && (
+                    <div>
+                      <h3 className="text-3xl font-bold text-foreground mb-8 text-center">Team Project</h3>
+                      <div className="min-h-[600px]">
+                        <ChromaGrid
+                          items={teamProjects}
+                          columns={1}
+                          rows={teamProjects.length}
+                          radius={300}
+                          onCardClick={handleProjectClick}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {personalProjects.length > 0 && (
+                    <div>
+                      <h3 className="text-3xl font-bold text-foreground mb-8 text-center">Personal Project</h3>
+                      <div className="min-h-[600px]">
+                        <ChromaGrid
+                          items={personalProjects}
+                          columns={1}
+                          rows={personalProjects.length}
+                          radius={300}
+                          onCardClick={handleProjectClick}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
