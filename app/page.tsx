@@ -4,12 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   FaGithub, 
-  FaEnvelope, 
-  FaLinkedin,
+  FaEnvelope,
   FaCode,
-  FaLaptopCode,
-  FaTools,
-  FaRocket
 } from 'react-icons/fa'
 
 export default function Home() {
@@ -40,7 +36,6 @@ export default function Home() {
       description: 'PC 관련 풀스택 프로젝트',
       tech: ['JavaScript', 'React', 'Node.js'],
       link: 'https://github.com/BeomJuGo/pc-site-frontend',
-    },
     },
   ]
 
@@ -254,7 +249,7 @@ export default function Home() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 className="flex items-center space-x-2 px-6 py-3 bg-gray-800 rounded-lg text-white hover:bg-gray-700 transition"
-          >
+              >
                 <FaEnvelope />
                 <span>이메일</span>
               </motion.a>
