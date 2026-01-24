@@ -9,7 +9,6 @@ import {
   FaRocket,
   FaUser,
   FaTools,
-  FaHome,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -19,7 +18,7 @@ import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
 
-type Page = 'home' | 'about' | 'skills' | 'projects' | 'contact'
+type Page = 'home' | 'about' | 'projects'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -65,9 +64,7 @@ export default function Home() {
     const pageMap: Record<Page, number> = {
       'home': 0,
       'about': 1,
-      'skills': 2,
-      'projects': 3,
-      'contact': 4,
+      'projects': 2,
     }
     return pageMap[currentPage]
   }
@@ -75,9 +72,7 @@ export default function Home() {
   const navItems = [
     { label: '홈', onClick: () => setCurrentPage('home') },
     { label: '소개', onClick: () => setCurrentPage('about') },
-    { label: '기술', onClick: () => setCurrentPage('skills') },
     { label: '프로젝트', onClick: () => setCurrentPage('projects') },
-    { label: '연락', onClick: () => setCurrentPage('contact') },
   ]
 
   if (!mounted) return null
@@ -233,7 +228,7 @@ export default function Home() {
                   <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
                   <div className="flex justify-center">
                     <ProfileCard
                       avatarUrl="/profile.png"
@@ -242,8 +237,7 @@ export default function Home() {
                       handle="BeomJuGo"
                       status="Online"
                       contactText="연락하기"
-                      showUserInfo={true}
-                      onContactClick={() => setCurrentPage('contact')}
+                      showUserInfo={false}
                     />
                   </div>
                   <div className="space-y-6">
@@ -291,57 +285,44 @@ export default function Home() {
                     </Card>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-
-          {currentPage === 'skills' && (
-            <motion.div
-              key="skills"
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-              transition={pageTransition}
-              className="h-screen overflow-y-auto px-4 sm:px-6 lg:px-8 py-20 bg-background/40 backdrop-blur-sm"
-            >
-              <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                  <Badge variant="outline" className="mb-4">
-                    <FaTools className="mr-2" />
-                    기술 스택
-                  </Badge>
-                  <h2 className="text-4xl font-bold text-foreground mb-4">Skills</h2>
-                  <Separator className="mx-auto w-24 mb-6" />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <Card className="border-2 hover:border-primary/50 transition-colors bg-background/80 backdrop-blur-sm">
-                        <CardHeader>
-                          <div className="flex justify-between items-center">
-                            <CardTitle className="text-lg">{skill.name}</CardTitle>
-                            <Badge variant="secondary">{skill.level}%</Badge>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="w-full bg-secondary rounded-full h-2.5">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
-                              transition={{ duration: 1, delay: index * 0.1 }}
-                              className="bg-gradient-to-r from-primary to-primary/60 h-2.5 rounded-full"
-                            />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
+                <div className="mt-12">
+                  <div className="text-center mb-8">
+                    <Badge variant="outline" className="mb-4">
+                      <FaTools className="mr-2" />
+                      기술 스택
+                    </Badge>
+                    <h2 className="text-4xl font-bold text-foreground mb-4">Skills</h2>
+                    <Separator className="mx-auto w-24 mb-6" />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <Card className="border-2 hover:border-primary/50 transition-colors bg-background/80 backdrop-blur-sm">
+                          <CardHeader>
+                            <div className="flex justify-between items-center">
+                              <CardTitle className="text-lg">{skill.name}</CardTitle>
+                              <Badge variant="secondary">{skill.level}%</Badge>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="w-full bg-secondary rounded-full h-2.5">
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: `${skill.level}%` }}
+                                transition={{ duration: 1, delay: index * 0.1 }}
+                                className="bg-gradient-to-r from-primary to-primary/60 h-2.5 rounded-full"
+                              />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -412,54 +393,6 @@ export default function Home() {
                       </Card>
                     </motion.div>
                   ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {currentPage === 'contact' && (
-            <motion.div
-              key="contact"
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={pageVariants}
-              transition={pageTransition}
-              className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background/40 backdrop-blur-sm"
-            >
-              <div className="max-w-7xl mx-auto text-center">
-                <h2 className="text-4xl font-bold text-foreground mb-4">연락하기</h2>
-                <Separator className="mx-auto w-24 mb-8" />
-                <p className="text-muted-foreground mb-8 text-lg">
-                  프로젝트나 협업에 관심이 있으시다면 언제든지 연락주세요!
-                </p>
-                <div className="flex justify-center gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button asChild size="lg" className="gap-2">
-                      <a
-                        href="https://github.com/BeomJuGo"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaGithub />
-                        GitHub
-                      </a>
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button asChild variant="outline" size="lg" className="gap-2">
-                      <a href="mailto:lom0097@naver.com">
-                        <FaEnvelope />
-                        이메일
-                      </a>
-                    </Button>
-                  </motion.div>
                 </div>
               </div>
             </motion.div>
