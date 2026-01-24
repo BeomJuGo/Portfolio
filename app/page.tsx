@@ -251,25 +251,21 @@ export default function Home() {
                       </CardContent>
                     </Card>
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
-                      <CardHeader>
-                        <CardTitle>개인 정보</CardTitle>
-                        <CardDescription>기본 정보</CardDescription>
-                      </CardHeader>
                       <CardContent className="space-y-4">
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이름:</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Name</span>
                           <span className="text-sm text-foreground">{personalInfo.name}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">생년월일:</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Birth</span>
                           <span className="text-sm text-foreground">{personalInfo.birthDate}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">주거지:</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Adress</span>
                           <span className="text-sm text-foreground">{personalInfo.address}</span>
                         </div>
                         <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이메일:</span>
+                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">Email</span>
                           <a 
                             href={`mailto:${personalInfo.email}`}
                             className="text-sm text-primary hover:underline"
