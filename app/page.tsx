@@ -100,6 +100,7 @@ export default function Home() {
       borderColor: '#4F46E5',
       gradient: 'linear-gradient(145deg, #4F46E5, #000)',
       detailPageId: 'health-site',
+      projectType: 'Team',
     },
     {
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
@@ -110,6 +111,7 @@ export default function Home() {
       borderColor: '#10B981',
       gradient: 'linear-gradient(210deg, #10B981, #000)',
       detailPageId: 'pc-site',
+      projectType: 'Personal',
     },
   ]
 
@@ -413,8 +415,8 @@ export default function Home() {
                 <div className="min-h-[600px]">
                   <ChromaGrid
                     items={projects}
-                    columns={2}
-                    rows={1}
+                    columns={1}
+                    rows={2}
                     radius={300}
                     onCardClick={handleProjectClick}
                   />
