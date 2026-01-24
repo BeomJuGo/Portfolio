@@ -79,7 +79,7 @@ export default function ColorBends({
       return [color.r, color.g, color.b]
     })
 
-    // Create shader material
+    // Create shader material for moving gradient bands
     const vertexShader = `
       uniform float u_time;
       uniform float u_speed;
@@ -89,6 +89,7 @@ export default function ColorBends({
       uniform vec2 u_mouse;
       uniform float u_mouseInfluence;
       uniform float u_scale;
+      uniform float u_parallax;
       
       varying vec2 vUv;
       varying vec3 vPosition;
@@ -115,13 +116,13 @@ export default function ColorBends({
         
         vec3 pos = position;
         
-        // Apply noise
-        float n = noise(pos.xy * u_frequency + u_time * u_speed) * u_noise;
+        // Apply noise for organic movement
+        float n = noise(pos.xy * u_frequency * 2.0 + u_time * u_speed) * u_noise;
         pos.z += n * u_warpStrength;
         
-        // Mouse influence
-        vec2 mouseOffset = (u_mouse * u_mouseInfluence) * 0.5;
-        pos.xy += mouseOffset;
+        // Mouse influence - warp the bands
+        vec2 mouseOffset = (u_mouse * u_mouseInfluence) * 0.3;
+        pos.xy += mouseOffset * (1.0 + n);
         
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos * u_scale, 1.0);
       }
@@ -133,44 +134,87 @@ export default function ColorBends({
       uniform float u_frequency;
       uniform vec3 u_colors[3];
       uniform float u_parallax;
+      uniform float u_warpStrength;
+      uniform vec2 u_mouse;
+      uniform float u_mouseInfluence;
       
       varying vec2 vUv;
       varying vec3 vPosition;
       
+      // Smooth step function for band edges
+      float smoothBand(float value, float center, float width) {
+        return smoothstep(center - width, center + width, value);
+      }
+      
       void main() {
         vec2 uv = vUv;
         
-        // Create color gradient based on position and time
+        // Time-based movement
         float t = u_time * u_speed;
-        float gradient = sin(uv.x * u_frequency + uv.y * u_frequency + t) * 0.5 + 0.5;
         
-        // Mix colors based on gradient
+        // Create moving bands - vertical bands that move horizontally
+        float bandPosition = uv.y * u_frequency + t;
+        
+        // Add mouse influence to warp bands
+        float mouseWarp = (u_mouse.x * u_mouseInfluence) * 0.5;
+        bandPosition += mouseWarp;
+        
+        // Add parallax effect
+        float parallaxOffset = sin(vPosition.x * u_parallax + vPosition.y * u_parallax + t) * 0.2;
+        bandPosition += parallaxOffset;
+        
+        // Create band pattern with smooth transitions
+        float band1 = smoothBand(bandPosition, 0.0, 0.15);
+        float band2 = smoothBand(bandPosition, 0.33, 0.15);
+        float band3 = smoothBand(bandPosition, 0.66, 0.15);
+        float band4 = smoothBand(bandPosition, 1.0, 0.15);
+        
+        // Mix colors based on band positions
         vec3 color1 = u_colors[0];
         vec3 color2 = u_colors[1];
         vec3 color3 = u_colors[2];
         
-        vec3 finalColor;
-        if (gradient < 0.5) {
-          finalColor = mix(color1, color2, gradient * 2.0);
-        } else {
-          finalColor = mix(color2, color3, (gradient - 0.5) * 2.0);
-        }
+        // Create gradient between bands
+        vec3 finalColor = vec3(0.0);
         
-        // Add parallax effect
-        float parallaxEffect = sin(vPosition.x * u_parallax + vPosition.y * u_parallax + t) * 0.1;
-        finalColor += parallaxEffect;
+        // First color band
+        float mix1 = 1.0 - band1;
+        finalColor += color1 * mix1;
         
-        // Add some glow
-        float glow = 1.0 - length(uv - 0.5) * 1.5;
-        glow = max(0.0, glow);
-        finalColor += glow * 0.2;
+        // Transition to second color
+        float mix2 = band1 * (1.0 - band2);
+        finalColor += mix(color1, color2, band1) * mix2;
         
-        gl_FragColor = vec4(finalColor, ${transparent ? '0.6' : '1.0'});
+        // Second color band
+        float mix3 = band2 * (1.0 - band3);
+        finalColor += color2 * mix3;
+        
+        // Transition to third color
+        float mix4 = band3 * (1.0 - band4);
+        finalColor += mix(color2, color3, (band3 - 0.33) / 0.33) * mix4;
+        
+        // Third color band
+        float mix5 = band4;
+        finalColor += color3 * mix5;
+        
+        // Add subtle glow at band edges
+        float edgeGlow = abs(sin(bandPosition * 3.14159)) * 0.3;
+        finalColor += edgeGlow;
+        
+        // Add radial glow
+        float radialGlow = 1.0 - length(uv - 0.5) * 1.2;
+        radialGlow = max(0.0, radialGlow);
+        finalColor += radialGlow * 0.15;
+        
+        // Clamp colors
+        finalColor = clamp(finalColor, 0.0, 1.0);
+        
+        gl_FragColor = vec4(finalColor, ${transparent ? '0.7' : '1.0'});
       }
     `
 
-    // Create geometry
-    const geometry = new THREE.PlaneGeometry(10, 10, 50, 50)
+    // Create geometry with more segments for smoother bands
+    const geometry = new THREE.PlaneGeometry(10, 10, 100, 100)
     
     // Create material
     const material = new THREE.ShaderMaterial({
