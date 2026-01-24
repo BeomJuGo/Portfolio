@@ -9,6 +9,7 @@ import {
   FaRocket,
   FaUser,
   FaTools,
+  FaArrowLeft,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -19,11 +20,23 @@ import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
 
-type Page = 'home' | 'about' | 'projects'
+type Page = 'home' | 'about' | 'projects' | 'project-detail'
+
+interface ProjectDetail {
+  id: string
+  title: string
+  description: string
+  fullDescription: string
+  techStack: string[]
+  githubUrl?: string
+  demoUrl?: string
+  features?: string[]
+}
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [currentPage, setCurrentPage] = useState<Page>('home')
+  const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -46,22 +59,57 @@ export default function Home() {
     { name: 'Python', level: 75 },
   ]
 
+  const projectDetails: Record<string, ProjectDetail> = {
+    'health-site': {
+      id: 'health-site',
+      title: 'Health-site',
+      description: '건강 관련 웹사이트 프로젝트',
+      fullDescription: '건강 관리와 관련된 정보를 제공하는 웹사이트입니다. 사용자들이 건강 정보를 쉽게 찾고 관리할 수 있도록 설계되었습니다.',
+      techStack: ['JavaScript', 'React'],
+      githubUrl: 'https://github.com/BeomJuGo/Health-site',
+      features: [
+        '건강 정보 검색 및 조회',
+        '사용자 맞춤 건강 추천',
+        '건강 데이터 시각화',
+        '반응형 디자인'
+      ]
+    },
+    'pc-site': {
+      id: 'pc-site',
+      title: 'PC Site',
+      description: 'PC 관련 풀스택 프로젝트',
+      fullDescription: 'PC 부품 및 조립 정보를 제공하는 풀스택 웹 애플리케이션입니다. 프론트엔드와 백엔드를 모두 구현하여 완전한 기능을 제공합니다.',
+      techStack: ['JavaScript', 'React', 'Node.js'],
+      githubUrl: 'https://github.com/BeomJuGo/pc-site-frontend',
+      features: [
+        'PC 부품 정보 조회',
+        '부품 호환성 체크',
+        '사용자 커뮤니티',
+        '실시간 가격 비교'
+      ]
+    }
+  }
+
   const projects: ChromaItem[] = [
     {
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
       title: 'Health-site',
       subtitle: '건강 관련 웹사이트 프로젝트',
+      techStack: ['JavaScript', 'React'],
+      videoUrl: 'https://raw.githubusercontent.com/BeomJuGo/Portfolio/main/public/videos/health-site-demo.mp4',
       borderColor: '#4F46E5',
       gradient: 'linear-gradient(145deg, #4F46E5, #000)',
-      url: 'https://github.com/BeomJuGo/Health-site',
+      detailPageId: 'health-site',
     },
     {
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
       title: 'PC Site',
       subtitle: 'PC 관련 풀스택 프로젝트',
+      techStack: ['JavaScript', 'React', 'Node.js'],
+      videoUrl: 'https://raw.githubusercontent.com/BeomJuGo/Portfolio/main/public/videos/pc-site-demo.mp4',
       borderColor: '#10B981',
       gradient: 'linear-gradient(210deg, #10B981, #000)',
-      url: 'https://github.com/BeomJuGo/pc-site-frontend',
+      detailPageId: 'pc-site',
     },
   ]
 
@@ -70,8 +118,9 @@ export default function Home() {
       'home': 0,
       'about': 1,
       'projects': 2,
+      'project-detail': 2,
     }
-    return pageMap[currentPage]
+    return pageMap[currentPage] || 0
   }
 
   const navItems = [
@@ -79,6 +128,15 @@ export default function Home() {
     { label: '소개', onClick: () => setCurrentPage('about') },
     { label: '프로젝트', onClick: () => setCurrentPage('projects') },
   ]
+
+  const handleProjectClick = (item: ChromaItem) => {
+    if (item.detailPageId && projectDetails[item.detailPageId]) {
+      setSelectedProject(projectDetails[item.detailPageId])
+      setCurrentPage('project-detail')
+    } else if (item.url) {
+      window.open(item.url, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   if (!mounted) return null
 
@@ -358,8 +416,92 @@ export default function Home() {
                     columns={2}
                     rows={1}
                     radius={300}
+                    onCardClick={handleProjectClick}
                   />
                 </div>
+              </div>
+            </motion.div>
+          )}
+
+          {currentPage === 'project-detail' && selectedProject && (
+            <motion.div
+              key="project-detail"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+              transition={pageTransition}
+              className="h-screen overflow-y-auto px-4 sm:px-6 lg:px-8 py-20 bg-background/40 backdrop-blur-sm"
+            >
+              <div className="max-w-4xl mx-auto">
+                <Button
+                  variant="ghost"
+                  className="mb-6"
+                  onClick={() => setCurrentPage('projects')}
+                >
+                  <FaArrowLeft className="mr-2" />
+                  프로젝트 목록으로
+                </Button>
+                <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
+                  <CardHeader>
+                    <CardTitle className="text-3xl mb-2">{selectedProject.title}</CardTitle>
+                    <CardDescription className="text-lg">{selectedProject.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">프로젝트 소개</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {selectedProject.fullDescription}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">사용된 기술 스택</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.techStack.map((tech) => (
+                          <Badge key={tech} variant="secondary" className="text-sm px-3 py-1">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    {selectedProject.features && (
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">주요 기능</h3>
+                        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                          {selectedProject.features.map((feature, index) => (
+                            <li key={index}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    <div className="flex gap-4 pt-4">
+                      {selectedProject.githubUrl && (
+                        <Button asChild>
+                          <a
+                            href={selectedProject.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                          >
+                            <FaGithub />
+                            GitHub에서 보기
+                          </a>
+                        </Button>
+                      )}
+                      {selectedProject.demoUrl && (
+                        <Button asChild variant="outline">
+                          <a
+                            href={selectedProject.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            데모 보기
+                          </a>
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </motion.div>
           )}
