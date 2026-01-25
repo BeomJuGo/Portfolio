@@ -23,6 +23,7 @@ import ColorBends from '@/components/ColorBends'
 import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
+import SplitText from '@/components/SplitText'
 
 type Page = 'home' | 'about' | 'projects' | 'project-detail'
 
@@ -311,7 +312,17 @@ export default function Home() {
                     <FaUser className="mr-2" />
                     소개
                   </Badge>
-                  <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
+                  <SplitText
+                    text="About Me"
+                    tag="h2"
+                    className="text-4xl font-bold text-foreground mb-4 block"
+                    splitType="chars"
+                    delay={30}
+                    duration={0.8}
+                    from={{ opacity: 0, y: 50, rotationX: -90 }}
+                    to={{ opacity: 1, y: 0, rotationX: 0 }}
+                    threshold={0.3}
+                  />
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
@@ -373,7 +384,17 @@ export default function Home() {
                       <FaTools className="mr-2" />
                       기술 스택
                     </Badge>
-                    <h2 className="text-4xl font-bold text-foreground mb-4">Skills</h2>
+                    <SplitText
+                      text="Skills"
+                      tag="h2"
+                      className="text-4xl font-bold text-foreground mb-4 block"
+                      splitType="chars"
+                      delay={30}
+                      duration={0.8}
+                      from={{ opacity: 0, y: 50, rotationX: -90 }}
+                      to={{ opacity: 1, y: 0, rotationX: 0 }}
+                      threshold={0.3}
+                    />
                     <Separator className="mx-auto w-24 mb-6" />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -426,7 +447,17 @@ export default function Home() {
                     <FaCode className="mr-2" />
                     프로젝트
                   </Badge>
-                  <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
+                  <SplitText
+                    text="Projects"
+                    tag="h2"
+                    className="text-4xl font-bold text-foreground mb-4 block"
+                    splitType="chars"
+                    delay={30}
+                    duration={0.8}
+                    from={{ opacity: 0, y: 50, rotationX: -90 }}
+                    to={{ opacity: 1, y: 0, rotationX: 0 }}
+                    threshold={0.3}
+                  />
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
                 <div className="space-y-16">
