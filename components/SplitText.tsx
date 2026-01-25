@@ -102,6 +102,8 @@ const SplitText: React.FC<SplitTextProps> = ({
         reduceWhiteSpace: false,
         onSplit: (self: GSAPSplitText) => {
           assignTargets(self);
+          // If threshold is >= 1.0, run immediately without ScrollTrigger (for home page)
+          const shouldUseScrollTrigger = threshold < 1.0;
           return gsap.fromTo(
             targets,
             { ...from },
@@ -110,13 +112,15 @@ const SplitText: React.FC<SplitTextProps> = ({
               duration,
               ease,
               stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4
-              },
+              ...(shouldUseScrollTrigger ? {
+                scrollTrigger: {
+                  trigger: el,
+                  start,
+                  once: true,
+                  fastScrollEnd: true,
+                  anticipatePin: 0.4
+                }
+              } : {}),
               onComplete: () => {
                 animationCompletedRef.current = true;
                 onCompleteRef.current?.();

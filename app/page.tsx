@@ -254,16 +254,56 @@ export default function Home() {
                     풀스택 개발자
                   </Badge>
                 </motion.div>
-                <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6">
-                  안녕하세요,{' '}
-                  <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                    고범주
-                  </span>
-                  입니다
-                </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  사용자 경험을 중시하며, 최신 기술을 활용하여 효율적이고 확장 가능한 웹 애플리케이션을 개발합니다.
-                </p>
+                <div className="text-5xl md:text-7xl font-bold text-foreground mb-6">
+                  <SplitText
+                    text="안녕하세요, "
+                    tag="span"
+                    className="inline-block"
+                    splitType="chars"
+                    delay={50}
+                    duration={0.6}
+                    from={{ opacity: 0, y: 30 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={1.0}
+                    rootMargin="0px"
+                  />
+                  <SplitText
+                    text="고범주"
+                    tag="span"
+                    className="inline-block bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+                    splitType="chars"
+                    delay={50}
+                    duration={0.6}
+                    from={{ opacity: 0, y: 30, scale: 0.8 }}
+                    to={{ opacity: 1, y: 0, scale: 1 }}
+                    threshold={1.0}
+                    rootMargin="0px"
+                  />
+                  <SplitText
+                    text=" 입니다"
+                    tag="span"
+                    className="inline-block"
+                    splitType="chars"
+                    delay={50}
+                    duration={0.6}
+                    from={{ opacity: 0, y: 30 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={1.0}
+                    rootMargin="0px"
+                  />
+                </div>
+                <SplitText
+                  text="사용자 경험을 중시하며, 최신 기술을 활용하여 효율적이고 확장 가능한 웹 애플리케이션을 개발합니다."
+                  tag="p"
+                  className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto block"
+                  splitType="words"
+                  delay={50}
+                  duration={0.8}
+                  from={{ opacity: 0, y: 20 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={1.0}
+                  rootMargin="0px"
+                />
                 <div className="flex justify-center gap-4">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -312,17 +352,7 @@ export default function Home() {
                     <FaUser className="mr-2" />
                     소개
                   </Badge>
-                  <SplitText
-                    text="About Me"
-                    tag="h2"
-                    className="text-4xl font-bold text-foreground mb-4 block"
-                    splitType="chars"
-                    delay={30}
-                    duration={0.8}
-                    from={{ opacity: 0, y: 50, rotationX: -90 }}
-                    to={{ opacity: 1, y: 0, rotationX: 0 }}
-                    threshold={0.3}
-                  />
+                  <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
@@ -384,17 +414,7 @@ export default function Home() {
                       <FaTools className="mr-2" />
                       기술 스택
                     </Badge>
-                    <SplitText
-                      text="Skills"
-                      tag="h2"
-                      className="text-4xl font-bold text-foreground mb-4 block"
-                      splitType="chars"
-                      delay={30}
-                      duration={0.8}
-                      from={{ opacity: 0, y: 50, rotationX: -90 }}
-                      to={{ opacity: 1, y: 0, rotationX: 0 }}
-                      threshold={0.3}
-                    />
+                    <h2 className="text-4xl font-bold text-foreground mb-4">Skills</h2>
                     <Separator className="mx-auto w-24 mb-6" />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -447,17 +467,7 @@ export default function Home() {
                     <FaCode className="mr-2" />
                     프로젝트
                   </Badge>
-                  <SplitText
-                    text="Projects"
-                    tag="h2"
-                    className="text-4xl font-bold text-foreground mb-4 block"
-                    splitType="chars"
-                    delay={30}
-                    duration={0.8}
-                    from={{ opacity: 0, y: 50, rotationX: -90 }}
-                    to={{ opacity: 1, y: 0, rotationX: 0 }}
-                    threshold={0.3}
-                  />
+                  <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
                 <div className="space-y-16">
