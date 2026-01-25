@@ -65,30 +65,44 @@ export default function Home() {
   const projectDetails: Record<string, ProjectDetail> = {
     'health-site': {
       id: 'health-site',
-      title: 'Health-site',
-      description: '건강 관련 웹사이트 프로젝트',
-      fullDescription: '건강 관리와 관련된 정보를 제공하는 웹사이트입니다. 사용자들이 건강 정보를 쉽게 찾고 관리할 수 있도록 설계되었습니다.',
-      techStack: ['JavaScript', 'React'],
+      title: 'Healthcare Platform',
+      description: '건강한 라이프스타일을 위한 헬스케어 플랫폼',
+      fullDescription: 'Spring Boot와 React를 활용한 풀스택 헬스케어 플랫폼입니다. 사용자들이 건강한 라이프스타일을 유지할 수 있도록 다양한 기능을 제공합니다. JWT 기반 인증 시스템을 통해 안전한 사용자 관리를 구현했으며, 트레이너와 사용자를 매칭하여 개인 맞춤형 운동 및 식단 플랜을 제공합니다. AI 기반 트레이너 추천 시스템을 통해 사용자에게 최적의 트레이너를 추천하며, 실시간 채팅 기능으로 트레이너와의 소통을 지원합니다. 커뮤니티 기능을 통해 사용자들이 운동 경험과 정보를 공유할 수 있으며, 리뷰 시스템을 통해 트레이너에 대한 평가를 남길 수 있습니다. 관리자 페이지를 통해 플랫폼 전체를 관리할 수 있으며, Cloudinary를 활용한 이미지 업로드 기능과 Flyway를 통한 데이터베이스 마이그레이션을 지원합니다.',
+      techStack: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'React', 'Vite', 'MySQL', 'PostgreSQL', 'Tailwind CSS', 'Shadcn UI', 'GSAP', 'FullCalendar', 'Cloudinary', 'Flyway'],
       githubUrl: 'https://github.com/BeomJuGo/Health-site',
       features: [
-        '건강 정보 검색 및 조회',
-        '사용자 맞춤 건강 추천',
-        '건강 데이터 시각화',
-        '반응형 디자인'
+        'JWT 기반 사용자 인증 및 권한 관리 시스템',
+        '트레이너 매칭 시스템 - 사용자와 트레이너를 효율적으로 매칭',
+        '운동 및 식단 플랜 관리 - 개인 맞춤형 건강 계획 수립 및 추적',
+        '커뮤니티 기능 - 게시글, 댓글, 좋아요를 통한 사용자 간 소통',
+        'AI 트레이너 추천 - 사용자 프로필 기반 최적 트레이너 추천',
+        '실시간 채팅 - 트레이너와 사용자 간 실시간 메시징',
+        '리뷰 시스템 - 트레이너에 대한 평가 및 피드백',
+        '관리자 페이지 - 플랫폼 전체 관리 및 모니터링',
+        '이미지 업로드 - Cloudinary를 활용한 프로필 및 게시글 이미지 관리',
+        'FullCalendar 통합 - 운동 일정 및 예약 관리',
+        'GSAP 애니메이션 - 부드러운 사용자 경험 제공'
       ]
     },
     'pc-site': {
       id: 'pc-site',
-      title: 'PC Site',
-      description: 'PC 관련 풀스택 프로젝트',
-      fullDescription: 'PC 부품 및 조립 정보를 제공하는 풀스택 웹 애플리케이션입니다. 프론트엔드와 백엔드를 모두 구현하여 완전한 기능을 제공합니다.',
-      techStack: ['JavaScript', 'React', 'Node.js'],
+      title: 'GoodPricePC',
+      description: 'PC 부품 비교 및 AI 견적 추천 플랫폼',
+      fullDescription: 'React를 기반으로 제작된 PC 부품 비교 및 추천 웹 애플리케이션입니다. 사용자가 예산과 용도에 맞는 최적의 PC 구성을 찾을 수 있도록 AI 기반 견적 추천 시스템을 제공합니다. 8가지 주요 부품 카테고리(CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워)별로 상세한 정보를 제공하며, 실시간 가격 비교와 성능 데이터를 통해 사용자가 정보에 기반한 결정을 내릴 수 있도록 지원합니다. 백엔드 API와 연동하여 수천 가지의 부품 조합을 분석하고, 호환성을 검증한 후 사용자에게 최적의 구성을 추천합니다. AI 전문가 평가 기능을 통해 각 빌드의 장단점과 추천사항을 제공하며, localStorage를 활용하여 견적 데이터를 저장하여 나중에 다시 확인할 수 있습니다. Tailwind CSS와 Shadcn UI를 활용한 현대적이고 반응형인 디자인을 제공합니다.',
+      techStack: ['React', 'React Router', 'Axios', 'Tailwind CSS', 'Shadcn UI', 'Recharts', 'JavaScript'],
       githubUrl: 'https://github.com/BeomJuGo/pc-site-frontend',
       features: [
-        'PC 부품 정보 조회',
-        '부품 호환성 체크',
-        '사용자 커뮤니티',
-        '실시간 가격 비교'
+        'AI 기반 PC 견적 추천 - 예산과 용도(게임용/작업용/사무용/가성비)에 맞는 최적 구성 추천',
+        '8가지 부품 카테고리 - CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워 상세 정보 제공',
+        '실시간 가격 비교 - 다양한 부품의 최신 가격 정보 제공',
+        '성능 데이터 및 벤치마크 - 부품별 성능 점수와 실제 사용 데이터',
+        '부품 호환성 검증 - CPU 소켓, 메모리 타입, 전력 소비, 케이스 폼팩터 자동 검증',
+        'AI 전문가 평가 - 각 빌드의 장점, 추천사항, 종합 평가 제공',
+        '다중 빌드 비교 - 가성비/균형/고성능 등 여러 옵션 제공 및 비교',
+        '견적 저장 기능 - localStorage를 통한 견적 데이터 저장 및 복원',
+        '부품 상세 정보 - 각 부품의 상세 스펙 및 성능 정보 확인',
+        '반응형 디자인 - 모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 경험',
+        '인터랙티브 UI - 마우스 추적 효과와 애니메이션을 통한 시각적 경험'
       ]
     }
   }
