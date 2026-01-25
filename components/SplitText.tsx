@@ -111,7 +111,7 @@ const SplitText: React.FC<SplitTextProps> = ({
             gsap.set(targets, { ...from });
           }
           
-          return gsap.fromTo(
+          const animation = gsap.fromTo(
             targets,
             { ...from },
             {
@@ -139,6 +139,11 @@ const SplitText: React.FC<SplitTextProps> = ({
               force3D: true
             }
           );
+          
+          // Ensure text is visible even during animation
+          gsap.set(targets, { visibility: 'visible', display: 'inline-block' });
+          
+          return animation;
         }
       });
       el._rbsplitInstance = splitInstance;

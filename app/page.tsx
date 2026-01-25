@@ -267,11 +267,11 @@ export default function Home() {
                     threshold={1.0}
                     rootMargin="0px"
                   />
-                  <span className="inline-block">
+                  <span className="inline-block text-primary">
                     <SplitText
                       text="고범주"
                       tag="span"
-                      className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+                      className=""
                       splitType="chars"
                       delay={50}
                       duration={0.6}
