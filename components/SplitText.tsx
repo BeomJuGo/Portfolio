@@ -17,7 +17,7 @@ export interface SplitTextProps {
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div';
   textAlign?: React.CSSProperties['textAlign'];
   onLetterAnimationComplete?: () => void;
 }
@@ -37,7 +37,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   tag = 'p',
   onLetterAnimationComplete
 }) => {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
@@ -205,6 +205,18 @@ const SplitText: React.FC<SplitTextProps> = ({
           <h6 ref={ref} style={style} className={classes}>
             {text}
           </h6>
+        );
+      case 'span':
+        return (
+          <span ref={ref} style={style} className={classes}>
+            {text}
+          </span>
+        );
+      case 'div':
+        return (
+          <div ref={ref} style={style} className={classes}>
+            {text}
+          </div>
         );
       default:
         return (
