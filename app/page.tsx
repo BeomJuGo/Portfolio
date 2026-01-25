@@ -267,18 +267,20 @@ export default function Home() {
                     threshold={1.0}
                     rootMargin="0px"
                   />
-                  <SplitText
-                    text="고범주"
-                    tag="span"
-                    className="inline-block bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
-                    splitType="chars"
-                    delay={50}
-                    duration={0.6}
-                    from={{ opacity: 0, y: 30, scale: 0.8 }}
-                    to={{ opacity: 1, y: 0, scale: 1 }}
-                    threshold={1.0}
-                    rootMargin="0px"
-                  />
+                  <span className="inline-block">
+                    <SplitText
+                      text="고범주"
+                      tag="span"
+                      className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+                      splitType="chars"
+                      delay={50}
+                      duration={0.6}
+                      from={{ y: 30, scale: 0.8 }}
+                      to={{ y: 0, scale: 1 }}
+                      threshold={1.0}
+                      rootMargin="0px"
+                    />
+                  </span>
                   <SplitText
                     text=" 입니다"
                     tag="span"
