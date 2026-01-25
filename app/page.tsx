@@ -24,6 +24,7 @@ import GooeyNav from '@/components/GooeyNav'
 import ProfileCard from '@/components/ProfileCard'
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
 import SplitText from '@/components/SplitText'
+import SplashCursor from '@/components/SplashCursor'
 
 type Page = 'home' | 'about' | 'projects' | 'project-detail'
 
@@ -191,6 +192,24 @@ export default function Home() {
         transparent
         autoRotate={0}
       />
+      
+      {/* Fluid Cursor Effect */}
+      {mounted && (
+        <SplashCursor
+          SIM_RESOLUTION={128}
+          DYE_RESOLUTION={1440}
+          DENSITY_DISSIPATION={3.5}
+          VELOCITY_DISSIPATION={2}
+          PRESSURE={0.1}
+          PRESSURE_ITERATIONS={20}
+          CURL={3}
+          SPLAT_RADIUS={0.2}
+          SPLAT_FORCE={6000}
+          SHADING={true}
+          COLOR_UPDATE_SPEED={10}
+          TRANSPARENT={true}
+        />
+      )}
       
       {/* SVG Filter for Gooey Effect */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
