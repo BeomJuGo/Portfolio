@@ -13,6 +13,7 @@ import {
   FaCalendar,
   FaMapMarkerAlt,
   FaGraduationCap,
+  FaExternalLinkAlt,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -91,6 +92,7 @@ export default function Home() {
       fullDescription: 'React를 기반으로 제작된 PC 부품 비교 및 추천 웹 애플리케이션입니다. 사용자가 예산과 용도에 맞는 최적의 PC 구성을 찾을 수 있도록 AI 기반 견적 추천 시스템을 제공합니다. 8가지 주요 부품 카테고리(CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워)별로 상세한 정보를 제공하며, 실시간 가격 비교와 성능 데이터를 통해 사용자가 정보에 기반한 결정을 내릴 수 있도록 지원합니다. 백엔드 API와 연동하여 수천 가지의 부품 조합을 분석하고, 호환성을 검증한 후 사용자에게 최적의 구성을 추천합니다. AI 전문가 평가 기능을 통해 각 빌드의 장단점과 추천사항을 제공하며, localStorage를 활용하여 견적 데이터를 저장하여 나중에 다시 확인할 수 있습니다. Tailwind CSS와 Shadcn UI를 활용한 현대적이고 반응형인 디자인을 제공합니다.',
       techStack: ['React', 'React Router', 'Axios', 'Tailwind CSS', 'Shadcn UI', 'Recharts', 'JavaScript'],
       githubUrl: 'https://github.com/BeomJuGo/pc-site-frontend',
+      demoUrl: 'https://pc-site-frontend.vercel.app',
       features: [
         'AI 기반 PC 견적 추천 - 예산과 용도(게임용/작업용/사무용/가성비)에 맞는 최적 구성 추천',
         '8가지 부품 카테고리 - CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워 상세 정보 제공',
@@ -528,13 +530,15 @@ export default function Home() {
                         </Button>
                       )}
                       {selectedProject.demoUrl && (
-                        <Button asChild variant="outline">
+                        <Button asChild variant="default" className="bg-primary hover:bg-primary/90">
                           <a
                             href={selectedProject.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="flex items-center gap-2"
                           >
-                            데모 보기
+                            <FaExternalLinkAlt />
+                            사이트로 이동
                           </a>
                         </Button>
                       )}
