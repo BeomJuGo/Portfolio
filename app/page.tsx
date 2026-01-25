@@ -10,6 +10,9 @@ import {
   FaUser,
   FaTools,
   FaArrowLeft,
+  FaCalendar,
+  FaMapMarkerAlt,
+  FaGraduationCap,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -319,25 +322,21 @@ export default function Home() {
                       </CardContent>
                     </Card>
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
-                      <CardHeader>
-                        <CardTitle>개인 정보</CardTitle>
-                        <CardDescription>기본 정보</CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이름:</span>
+                      <CardContent className="pt-6 space-y-4">
+                        <div className="flex items-center gap-4">
+                          <FaUser className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.name}</span>
                         </div>
-                        <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">생년월일:</span>
+                        <div className="flex items-center gap-4">
+                          <FaCalendar className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.birthDate}</span>
                         </div>
-                        <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">주거지:</span>
+                        <div className="flex items-center gap-4">
+                          <FaMapMarkerAlt className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.address}</span>
                         </div>
-                        <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">이메일:</span>
+                        <div className="flex items-center gap-4">
+                          <FaEnvelope className="text-primary text-lg flex-shrink-0" />
                           <a 
                             href={`mailto:${personalInfo.email}`}
                             className="text-sm text-primary hover:underline"
@@ -345,8 +344,8 @@ export default function Home() {
                             {personalInfo.email}
                           </a>
                         </div>
-                        <div className="flex items-start gap-4">
-                          <span className="text-sm font-medium text-muted-foreground min-w-[100px]">대학교:</span>
+                        <div className="flex items-center gap-4">
+                          <FaGraduationCap className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.university}</span>
                         </div>
                       </CardContent>
