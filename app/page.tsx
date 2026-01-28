@@ -13,6 +13,7 @@ import {
   FaCalendar,
   FaMapMarkerAlt,
   FaGraduationCap,
+  FaPhoneAlt,
   FaExternalLinkAlt,
 } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
@@ -427,7 +428,7 @@ export default function Home() {
                           <span className="text-sm text-foreground">{personalInfo.university}</span>
                         </div>
                         <div className="flex items-center gap-4">
-                          <FaGraduationCap className="text-primary text-lg flex-shrink-0" />
+                          <FaPhoneAlt className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.phone}</span>
                         </div>
                       </CardContent>
