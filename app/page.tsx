@@ -53,7 +53,8 @@ export default function Home() {
     birthDate: '1998.10.29',
     address: '경기도 용인시',
     email: 'lom0097@naver.com',
-    university: '강남대학교 소프트웨어 전공'
+    university: '강남대학교 소프트웨어 전공',
+    phone: '010-2920-0097'
   }
 
   const skills = [
@@ -424,6 +425,10 @@ export default function Home() {
                         <div className="flex items-center gap-4">
                           <FaGraduationCap className="text-primary text-lg flex-shrink-0" />
                           <span className="text-sm text-foreground">{personalInfo.university}</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <FaGraduationCap className="text-primary text-lg flex-shrink-0" />
+                          <span className="text-sm text-foreground">{personalInfo.phone}</span>
                         </div>
                       </CardContent>
                     </Card>
