@@ -421,10 +421,14 @@ export default function Home() {
                   <div className="space-y-6">
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
                       <CardContent className="pt-6">
-                        <p className="text-muted-foreground text-lg leading-relaxed">
-                          풀스택 개발자로서 프론트엔드와 백엔드 개발에 열정을 가지고 있습니다.
-                          사용자 경험을 중시하며, 최신 기술을 활용하여 효율적이고 확장 가능한 웹 애플리케이션을 개발합니다.
-                          코드 품질과 성능 최적화에 관심이 많으며, 지속적으로 학습하고 성장하는 것을 즐깁니다.
+                        <p className="text-muted-foreground text-lg leading-relaxed whitespace-pre-line">
+                          웹개발, 웹디자인, 크롤링, 웹표준, Java, JSP, Servlet 등의 기술을 습득하며 전공 지식을 쌓아왔습니다. 학업과 K-디지털 트레이닝 훈련을 통해 이론적인 지식 뿐만 아니라 실무 경험 또한 쌓을 수 있었습니다.
+                          {'\n\n'}
+                          이를 통해 다양한 프로젝트를 경험하며 문제 해결 능력과 창의적 사고를 기를 수 있었으며, 빠르게 변화하는 IT 산업에 발맞춰 지속적인 학습과 발전을 추구하고 있습니다.
+                          {'\n\n'}
+                          저는 꾸준한 노력과 열정으로 성장하며 주어진 일에 최선을 다하고 팀원들과 협력하여 목표를 달성하는 데 기여하고 싶습니다.
+                          {'\n\n'}
+                          끊임없는 도전으로 더 나은 결과물을 만들어내는 모습을 보여드리겠습니다.
                         </p>
                       </CardContent>
                     </Card>
