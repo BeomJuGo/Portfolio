@@ -26,7 +26,7 @@ import ProfileCard from '@/components/ProfileCard'
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
 import SplitText from '@/components/SplitText'
 import SplashCursor from '@/components/SplashCursor'
-import { educationCourses, totalEducationHours } from '@/lib/education'
+import { campCourses, universityCourse, totalEducationHours } from '@/lib/education'
 
 type Page = 'home' | 'about' | 'projects' | 'project-detail'
 
@@ -45,7 +45,9 @@ export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [currentPage, setCurrentPage] = useState<Page>('home')
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null)
-  const [selectedCourseIndex, setSelectedCourseIndex] = useState(0)
+  const [educationTab, setEducationTab] = useState<'camp' | 'university'>('camp')
+  const [selectedCampIndex, setSelectedCampIndex] = useState(0)
+  const [selectedUniversityIndex, setSelectedUniversityIndex] = useState(0)
 
   useEffect(() => {
     setMounted(true)
@@ -480,97 +482,137 @@ export default function Home() {
                       교육이수
                     </Badge>
                     <h2 className="text-4xl font-bold text-foreground mb-4">Education & Training</h2>
-                    <p className="text-muted-foreground text-sm sm:text-base mb-1">
-                      클라우드 데브옵스 프론트엔드&백엔드 자바 풀스택 개발자 취업캠프 · 총 {totalEducationHours}시간 수료
-                    </p>
                     <Separator className="mx-auto w-24 mb-6" />
                   </div>
-                  <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8">
-                    {/* 교과목 목록 */}
-                    <nav className="lg:w-56 flex-shrink-0">
-                      <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:overflow-visible">
-                        {educationCourses.map((course, index) => (
-                          <button
-                            key={course.name}
-                            type="button"
-                            onClick={() => setSelectedCourseIndex(index)}
-                            className={`
-                              flex-shrink-0 lg:flex-shrink text-left px-4 py-3 rounded-lg border-2 transition-all
-                              ${selectedCourseIndex === index
-                                ? 'border-primary bg-primary/10 text-foreground font-medium'
-                                : 'border-border bg-background/60 hover:border-primary/40 hover:bg-muted/50 text-muted-foreground'}
-                            `}
-                          >
-                            <span className="block truncate pr-2">{course.name}</span>
-                            <span className="text-xs mt-0.5 opacity-80">{course.totalHours}시간</span>
-                          </button>
-                        ))}
-                      </div>
-                    </nav>
-                    {/* 선택된 교과목의 교육내용 */}
-                    <div className="flex-1 min-w-0">
-                      <AnimatePresence mode="wait">
-                        {(() => {
-                          const course = educationCourses[selectedCourseIndex]
-                          return (
-                            <motion.div
-                              key={course.name}
-                              initial={{ opacity: 0, x: 12 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              exit={{ opacity: 0, x: -12 }}
-                              transition={{ duration: 0.2 }}
-                              className="space-y-4"
-                            >
-                              <div className="flex items-center justify-between gap-4 mb-4">
-                                <h3 className="text-xl font-bold text-foreground">{course.name}</h3>
-                                {course.totalHours > 0 && (
-                                  <Badge variant="secondary" className="text-sm">
-                                    총 {course.totalHours}시간
-                                  </Badge>
-                                )}
-                              </div>
-                              <ul className="space-y-3">
-                                {course.items.map((item, i) => (
-                                  <motion.li
-                                    key={item.subject}
-                                    initial={{ opacity: 0, y: 8 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.05 }}
-                                  >
-                                    <Card className="border-2 bg-background/80 backdrop-blur-sm hover:border-primary/30 transition-colors overflow-hidden">
-                                      <CardContent className="p-4 sm:p-5">
-                                        <div className="flex justify-between items-start gap-3 mb-2">
-                                          <CardTitle className="text-base sm:text-lg">{item.subject}</CardTitle>
-                                          {item.hours > 0 && (
-                                            <Badge variant="outline" className="flex-shrink-0 text-primary">
-                                              {item.hours}h
-                                            </Badge>
-                                          )}
-                                        </div>
-                                        {item.hours === 0 ? (
-                                          <div className="flex flex-wrap gap-2 mt-2">
-                                            {item.detail.split(', ').map((name) => (
-                                              <Badge key={name} variant="secondary" className="font-normal text-xs">
-                                                {name}
-                                              </Badge>
-                                            ))}
-                                          </div>
-                                        ) : (
-                                          <p className="text-sm text-muted-foreground leading-relaxed">
-                                            {item.detail}
-                                          </p>
-                                        )}
-                                      </CardContent>
-                                    </Card>
-                                  </motion.li>
-                                ))}
-                              </ul>
-                            </motion.div>
-                          )
-                        })()}
-                      </AnimatePresence>
+                  {/* 최상위 탭: 취업캠프 / 강남대학교 */}
+                  <div className="max-w-5xl mx-auto mb-6">
+                    <div className="flex gap-2 p-1 rounded-lg bg-muted/50 border border-border">
+                      <button
+                        type="button"
+                        onClick={() => setEducationTab('camp')}
+                        className={`flex-1 py-2.5 px-4 rounded-md text-sm font-medium transition-all ${educationTab === 'camp' ? 'bg-background text-foreground shadow border border-border' : 'text-muted-foreground hover:text-foreground'}`}
+                      >
+                        클라우드 데브옵스 프론트엔드&백엔드 자바 풀스택 개발자 취업캠프
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setEducationTab('university')}
+                        className={`flex-1 py-2.5 px-4 rounded-md text-sm font-medium transition-all ${educationTab === 'university' ? 'bg-background text-foreground shadow border border-border' : 'text-muted-foreground hover:text-foreground'}`}
+                      >
+                        강남대학교 소프트웨어 전공
+                      </button>
                     </div>
                   </div>
+                  {/* 취업캠프 탭 */}
+                  {educationTab === 'camp' && (
+                    <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8">
+                      <p className="text-muted-foreground text-sm -mt-2 lg:hidden">총 {totalEducationHours}시간 수료</p>
+                      <nav className="lg:w-56 flex-shrink-0">
+                        <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:overflow-visible">
+                          {campCourses.map((course, index) => (
+                            <button
+                              key={course.name}
+                              type="button"
+                              onClick={() => setSelectedCampIndex(index)}
+                              className={`
+                                flex-shrink-0 lg:flex-shrink text-left px-4 py-3 rounded-lg border-2 transition-all
+                                ${selectedCampIndex === index ? 'border-primary bg-primary/10 text-foreground font-medium' : 'border-border bg-background/60 hover:border-primary/40 hover:bg-muted/50 text-muted-foreground'}
+                              `}
+                            >
+                              <span className="block truncate pr-2">{course.name}</span>
+                              <span className="text-xs mt-0.5 opacity-80">{course.totalHours}시간</span>
+                            </button>
+                          ))}
+                        </div>
+                      </nav>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-muted-foreground text-sm mb-4 hidden lg:block">총 {totalEducationHours}시간 수료</p>
+                        <AnimatePresence mode="wait">
+                          {(() => {
+                            const course = campCourses[selectedCampIndex]
+                            return (
+                              <motion.div
+                                key={course.name}
+                                initial={{ opacity: 0, x: 12 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -12 }}
+                                transition={{ duration: 0.2 }}
+                                className="space-y-4"
+                              >
+                                <div className="flex items-center justify-between gap-4 mb-4">
+                                  <h3 className="text-xl font-bold text-foreground">{course.name}</h3>
+                                  <Badge variant="secondary" className="text-sm">총 {course.totalHours}시간</Badge>
+                                </div>
+                                <ul className="space-y-3">
+                                  {course.items.map((item, i) => (
+                                    <motion.li key={item.subject} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+                                      <Card className="border-2 bg-background/80 backdrop-blur-sm hover:border-primary/30 transition-colors overflow-hidden">
+                                        <CardContent className="p-4 sm:p-5">
+                                          <div className="flex justify-between items-start gap-3 mb-2">
+                                            <CardTitle className="text-base sm:text-lg">{item.subject}</CardTitle>
+                                            <Badge variant="outline" className="flex-shrink-0 text-primary">{item.hours}h</Badge>
+                                          </div>
+                                          <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
+                                        </CardContent>
+                                      </Card>
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )
+                          })()}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  )}
+                  {/* 강남대학교 소프트웨어 전공 탭 */}
+                  {educationTab === 'university' && (
+                    <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8">
+                      <nav className="lg:w-56 flex-shrink-0">
+                        <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:overflow-visible">
+                          {universityCourse.items.map((item, index) => (
+                            <button
+                              key={item.subject}
+                              type="button"
+                              onClick={() => setSelectedUniversityIndex(index)}
+                              className={`
+                                flex-shrink-0 lg:flex-shrink text-left px-4 py-3 rounded-lg border-2 transition-all
+                                ${selectedUniversityIndex === index ? 'border-primary bg-primary/10 text-foreground font-medium' : 'border-border bg-background/60 hover:border-primary/40 hover:bg-muted/50 text-muted-foreground'}
+                              `}
+                            >
+                              <span className="block truncate pr-2">{item.subject}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </nav>
+                      <div className="flex-1 min-w-0">
+                        <AnimatePresence mode="wait">
+                          {(() => {
+                            const item = universityCourse.items[selectedUniversityIndex]
+                            return (
+                              <motion.div
+                                key={item.subject}
+                                initial={{ opacity: 0, x: 12 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -12 }}
+                                transition={{ duration: 0.2 }}
+                              >
+                                <h3 className="text-xl font-bold text-foreground mb-4">{universityCourse.name}</h3>
+                                <p className="text-sm text-muted-foreground mb-4">{item.subject} 이수 교과목</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {item.detail.split(', ').map((name) => (
+                                    <Badge key={name} variant="secondary" className="font-normal text-xs">
+                                      {name}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )
+                          })()}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-12">
                   <div className="text-center mb-8">

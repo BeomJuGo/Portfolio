@@ -134,5 +134,11 @@ export const educationCourses: EducationCourse[] = [
   },
 ]
 
+/** 취업캠프 과정만 (대학 제외) */
+export const campCourses = educationCourses.filter((c) => c.totalHours > 0)
+
+/** 강남대학교 소프트웨어 전공 (별도 탭용) */
+export const universityCourse = educationCourses.find((c) => c.totalHours === 0)!
+
 /** 화면 표시용 총 교육시간 (고정) */
 export const totalEducationHours = 960
