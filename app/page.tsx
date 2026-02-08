@@ -161,7 +161,7 @@ export default function Home() {
       borderColor: '#ED4B5E',
       gradient: 'linear-gradient(145deg, #ED4B5E, #000)',
       detailPageId: 'voice-detection',
-      projectType: 'Personal',
+      projectType: 'Team',
     },
   ]
 
@@ -532,8 +532,8 @@ export default function Home() {
                       <div className="min-h-[600px]">
                         <ChromaGrid
                           items={teamProjects}
-                          columns={1}
-                          rows={teamProjects.length}
+                          columns={2}
+                          rows={Math.ceil(teamProjects.length / 2)}
                           radius={300}
                           onCardClick={handleProjectClick}
                         />
