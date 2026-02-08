@@ -251,13 +251,14 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: luminosity;
+  mix-blend-mode: normal !important;
+  isolation: isolate;
   overflow: visible;
   transform: translateZ(2);
   backface-visibility: hidden;
 }
-
 .pc-avatar-content .avatar {
+  mix-blend-mode: normal !important;
   width: 100%;
   position: absolute;
   left: 50%;
@@ -268,11 +269,8 @@
   backface-visibility: hidden;
 }
 
-/* Mobile: brighter profile photo for better visibility */
+/* Mobile: use original image (no filter) */
 @media (max-width: 768px) {
-  .pc-avatar-content .avatar {
-    filter: brightness(1.35) contrast(1.12);
-  }
   .pc-avatar-content::before {
     background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 50%);
   }
