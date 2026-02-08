@@ -109,6 +109,23 @@ export default function Home() {
         '부품 상세 정보 - 각 부품의 상세 스펙 및 성능 정보 확인',
         '반응형 디자인 - 모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 경험'
       ]
+    },
+    'voice-detection': {
+      id: 'voice-detection',
+      title: '음성감지 프로젝트',
+      description: '공장 안전을 위한 실시간 음성/소음 감지 시스템',
+      fullDescription: '공장 현장에서 비상 음성(구조요청, 비명 등)과 이상 소음을 실시간으로 감지하는 풀스택 프로젝트입니다. Spring Boot 백엔드, React 프론트엔드, Python ML 서비스로 구성되어 있으며, Mel Spectrogram 기반 CNN 모델로 7가지 클래스(비명, 구조요청, 비상, 배경소음, 공장소음, 도로소음, 정상)를 분류합니다. 마이크 설정, 구역별 모니터링, 이벤트·알림 관리, 시스템 상태 대시보드를 제공하며, 웹소켓을 통한 실시간 오디오 스트리밍과 AI 예측 결과를 연동합니다.',
+      techStack: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'React', 'Python', 'Flask', 'TensorFlow', 'Keras', 'MySQL', 'WebSocket'],
+      githubUrl: 'https://github.com/BeomJuGo/factory-main',
+      features: [
+        '실시간 음성/소음 감지 - 마이크 입력 기반 24시간 모니터링',
+        'AI 분류 모델 - CNN 기반 7-class 음성 분류 (비명, 구조요청, 비상 등)',
+        '구역별 모니터링 - 공장 구역별 상태 및 이상 감지 이력 표시',
+        '이벤트·알림 - 감지 이벤트 저장 및 알림 설정',
+        '시스템 대시보드 - 마이크 상태, PC 리소스, ML 서비스 상태',
+        'JWT 인증 및 사용자/관리자 역할 관리',
+        '웹소켓 실시간 오디오 스트리밍 및 예측 결과 연동'
+      ]
     }
   }
 
@@ -133,6 +150,17 @@ export default function Home() {
       borderColor: '#10B981',
       gradient: 'linear-gradient(210deg, #10B981, #000)',
       detailPageId: 'pc-site',
+      projectType: 'Personal',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop',
+      title: '음성감지 프로젝트',
+      subtitle: '공장 안전 실시간 음성/소음 감지 시스템',
+      techStack: ['Java', 'Spring Boot', 'React', 'Python', 'TensorFlow'],
+      videoUrl: '/videos/voice-detection-demo.mp4',
+      borderColor: '#ED4B5E',
+      gradient: 'linear-gradient(145deg, #ED4B5E, #000)',
+      detailPageId: 'voice-detection',
       projectType: 'Personal',
     },
   ]
