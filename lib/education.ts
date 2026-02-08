@@ -112,7 +112,7 @@ export const educationCourses: EducationCourse[] = [
     items: [
       {
         subject: '2024학년도 1학기',
-        detail: '컴퓨터프로그래밍, 채플(골드체리더십)III, 인성과학문I, 소프트웨어개발, 자바프로그래밍, 컴퓨터구조, 알고리즘, UNIX서버',
+        detail: '컴퓨터프로그래밍, 소프트웨어개발, 자바프로그래밍, 컴퓨터구조, 알고리즘, UNIX서버',
         hours: 0,
       },
       {
@@ -122,12 +122,12 @@ export const educationCourses: EducationCourse[] = [
       },
       {
         subject: '2025학년도 1학기',
-        detail: '웹개발기초, 실강피지컬컴퓨팅, 인성과학문I, 채플(공동체리더십)III, 웹프로그래밍, 정보보호개론, 캡스톤디자인(8W)I, AIOT소프트웨어',
+        detail: '웹개발기초, 실강피지컬컴퓨팅, 웹프로그래밍, 정보보호개론, 캡스톤디자인(SW)I, AIOT소프트웨어',
         hours: 0,
       },
       {
         subject: '2025학년도 2학기',
-        detail: '정보통신개론, 모바일프로그래밍, 컴퓨터비전, 캡스톤디자인(8W)II, C프로그래밍, 졸업종합평가',
+        detail: '정보통신개론, 모바일프로그래밍, 컴퓨터비전, 캡스톤디자인(SW)II, C프로그래밍, 졸업종합평가',
         hours: 0,
       },
     ],
