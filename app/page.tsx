@@ -523,9 +523,11 @@ export default function Home() {
                             >
                               <div className="flex items-center justify-between gap-4 mb-4">
                                 <h3 className="text-xl font-bold text-foreground">{course.name}</h3>
-                                <Badge variant="secondary" className="text-sm">
-                                  총 {course.totalHours}시간
-                                </Badge>
+                                {course.totalHours > 0 && (
+                                  <Badge variant="secondary" className="text-sm">
+                                    총 {course.totalHours}시간
+                                  </Badge>
+                                )}
                               </div>
                               <ul className="space-y-3">
                                 {course.items.map((item, i) => (
@@ -539,13 +541,25 @@ export default function Home() {
                                       <CardContent className="p-4 sm:p-5">
                                         <div className="flex justify-between items-start gap-3 mb-2">
                                           <CardTitle className="text-base sm:text-lg">{item.subject}</CardTitle>
-                                          <Badge variant="outline" className="flex-shrink-0 text-primary">
-                                            {item.hours}h
-                                          </Badge>
+                                          {item.hours > 0 && (
+                                            <Badge variant="outline" className="flex-shrink-0 text-primary">
+                                              {item.hours}h
+                                            </Badge>
+                                          )}
                                         </div>
-                                        <p className="text-sm text-muted-foreground leading-relaxed">
-                                          {item.detail}
-                                        </p>
+                                        {item.hours === 0 ? (
+                                          <div className="flex flex-wrap gap-2 mt-2">
+                                            {item.detail.split(', ').map((name) => (
+                                              <Badge key={name} variant="secondary" className="font-normal text-xs">
+                                                {name}
+                                              </Badge>
+                                            ))}
+                                          </div>
+                                        ) : (
+                                          <p className="text-sm text-muted-foreground leading-relaxed">
+                                            {item.detail}
+                                          </p>
+                                        )}
                                       </CardContent>
                                     </Card>
                                   </motion.li>

@@ -92,29 +92,47 @@ export const educationCourses: EducationCourse[] = [
   },
   {
     name: '클라우드 데브옵스 응용 실무 프로젝트',
-    totalHours: 288,
+    totalHours: 240,
     items: [
       {
-        subject: '1차 프로젝트',
-        detail: 'MSA 기반 커피 전문점 매장관리 서비스 — 회원/주문/서빙 마이크로서비스',
+        subject: 'Healthcare Platform (Health-site)',
+        detail: 'Spring Boot·React 풀스택 헬스케어 플랫폼. JWT 인증·트레이너 매칭·맞춤형 운동/식단 플랜·AI 트레이너 추천·실시간 채팅·커뮤니티·리뷰·관리자 페이지·FullCalendar 일정/예약·MySQL/PostgreSQL·Flyway',
         hours: 120,
       },
       {
-        subject: '2차 프로젝트',
-        detail: '클라우드 기반 차세대 디지털교육 통합 플랫폼 — 입학지원·학사관리·LMS 비대면교육',
-        hours: 168,
+        subject: '공장 안전 음성감지 시스템 (factory-main)',
+        detail: '공장 현장 비상 음성·이상 소음 실시간 감지. Spring Boot·React·Python(Flask) 백엔드/프론트/ML 분리 구성, Mel Spectrogram CNN 7-class 분류·구역별 모니터링·이벤트/알림·웹소켓 실시간 오디오 스트리밍·시스템 대시보드·JWT 인증',
+        hours: 120,
       },
     ],
   },
   {
-    name: '재량교과',
-    totalHours: 6,
+    name: '강남대학교 소프트웨어 전공',
+    totalHours: 0,
     items: [
-      { subject: '입과식', detail: '원장 인사·강사/매니저 소개·취업지원 프로세스·사전평가', hours: 1 },
-      { subject: '수료식', detail: '수료증·우수 훈련생 상·취업지원 안내', hours: 1 },
-      { subject: '취업지원', detail: '맞춤형 취업가이드·이력서/자기소개서 클리닉·실전 면접', hours: 4 },
+      {
+        subject: '2024학년도 1학기',
+        detail: '컴퓨터프로그래밍, 채플(골드체리더십)III, 인성과학문I, 소프트웨어개발, 자바프로그래밍, 컴퓨터구조, 알고리즘, UNIX서버',
+        hours: 0,
+      },
+      {
+        subject: '2024학년도 2학기',
+        detail: '자료구조및알고리즘, 프로그래밍언어, 파이썬프로그래밍, 객체지향프로그래밍, 임베디드기초',
+        hours: 0,
+      },
+      {
+        subject: '2025학년도 1학기',
+        detail: '웹개발기초, 실강피지컬컴퓨팅, 인성과학문I, 채플(공동체리더십)III, 웹프로그래밍, 정보보호개론, 캡스톤디자인(8W)I, AIOT소프트웨어',
+        hours: 0,
+      },
+      {
+        subject: '2025학년도 2학기',
+        detail: '정보통신개론, 모바일프로그래밍, 컴퓨터비전, 캡스톤디자인(8W)II, C프로그래밍, 졸업종합평가',
+        hours: 0,
+      },
     ],
   },
 ]
 
-export const totalEducationHours = educationCourses.reduce((sum, c) => sum + c.totalHours, 0)
+/** 화면 표시용 총 교육시간 (고정) */
+export const totalEducationHours = 960
