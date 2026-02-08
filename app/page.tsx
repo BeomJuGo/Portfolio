@@ -26,6 +26,7 @@ import ProfileCard from '@/components/ProfileCard'
 import ChromaGrid, { ChromaItem } from '@/components/ChromaGrid'
 import SplitText from '@/components/SplitText'
 import SplashCursor from '@/components/SplashCursor'
+import { educationCourses, totalEducationHours } from '@/lib/education'
 
 type Page = 'home' | 'about' | 'projects' | 'project-detail'
 
@@ -44,6 +45,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [currentPage, setCurrentPage] = useState<Page>('home')
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null)
+  const [selectedCourseIndex, setSelectedCourseIndex] = useState(0)
 
   useEffect(() => {
     setMounted(true)
@@ -478,26 +480,83 @@ export default function Home() {
                       교육이수
                     </Badge>
                     <h2 className="text-4xl font-bold text-foreground mb-4">Education & Training</h2>
+                    <p className="text-muted-foreground text-sm sm:text-base mb-1">
+                      클라우드 데브옵스 프론트엔드&백엔드 자바 풀스택 개발자 취업캠프 · 총 {totalEducationHours}시간 수료
+                    </p>
                     <Separator className="mx-auto w-24 mb-6" />
                   </div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="max-w-4xl mx-auto"
-                  >
-                    <Card className="border-2 bg-background/80 backdrop-blur-sm hover:border-primary/30 transition-colors">
-                      <CardContent className="pt-6 pb-6 px-6 sm:px-8">
-                        <p className="text-muted-foreground text-base sm:text-lg leading-relaxed whitespace-pre-line">
-                          클라우드 데브옵스 프론트엔드&백엔드 자바 풀스택 개발자 취업캠프 수료(총 약 960시간).
-                          {'\n\n'}
-                          Java 객체지향·Spring Boot·JSP/Servlet·MyBatis 백엔드, HTML/CSS/JavaScript·React 프론트엔드, MySQL·SQL/PL-SQL 데이터베이스, AWS(EC2·S3·Route53)·Linux·DevOps(젠킨스·Terraform)·MSA 이론 및 실습 수강.
-                          {'\n\n'}
-                          MSA 기반 커피 매장관리 서비스·클라우드 기반 디지털교육 통합 플랫폼(LMS·입학지원·학사관리) 실무 프로젝트 2회 수행.
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
+                  <div className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8">
+                    {/* 교과목 목록 */}
+                    <nav className="lg:w-56 flex-shrink-0">
+                      <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:overflow-visible">
+                        {educationCourses.map((course, index) => (
+                          <button
+                            key={course.name}
+                            type="button"
+                            onClick={() => setSelectedCourseIndex(index)}
+                            className={`
+                              flex-shrink-0 lg:flex-shrink text-left px-4 py-3 rounded-lg border-2 transition-all
+                              ${selectedCourseIndex === index
+                                ? 'border-primary bg-primary/10 text-foreground font-medium'
+                                : 'border-border bg-background/60 hover:border-primary/40 hover:bg-muted/50 text-muted-foreground'}
+                            `}
+                          >
+                            <span className="block truncate pr-2">{course.name}</span>
+                            <span className="text-xs mt-0.5 opacity-80">{course.totalHours}시간</span>
+                          </button>
+                        ))}
+                      </div>
+                    </nav>
+                    {/* 선택된 교과목의 교육내용 */}
+                    <div className="flex-1 min-w-0">
+                      <AnimatePresence mode="wait">
+                        {(() => {
+                          const course = educationCourses[selectedCourseIndex]
+                          return (
+                            <motion.div
+                              key={course.name}
+                              initial={{ opacity: 0, x: 12 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: -12 }}
+                              transition={{ duration: 0.2 }}
+                              className="space-y-4"
+                            >
+                              <div className="flex items-center justify-between gap-4 mb-4">
+                                <h3 className="text-xl font-bold text-foreground">{course.name}</h3>
+                                <Badge variant="secondary" className="text-sm">
+                                  총 {course.totalHours}시간
+                                </Badge>
+                              </div>
+                              <ul className="space-y-3">
+                                {course.items.map((item, i) => (
+                                  <motion.li
+                                    key={item.subject}
+                                    initial={{ opacity: 0, y: 8 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.05 }}
+                                  >
+                                    <Card className="border-2 bg-background/80 backdrop-blur-sm hover:border-primary/30 transition-colors overflow-hidden">
+                                      <CardContent className="p-4 sm:p-5">
+                                        <div className="flex justify-between items-start gap-3 mb-2">
+                                          <CardTitle className="text-base sm:text-lg">{item.subject}</CardTitle>
+                                          <Badge variant="outline" className="flex-shrink-0 text-primary">
+                                            {item.hours}h
+                                          </Badge>
+                                        </div>
+                                        <p className="text-sm text-muted-foreground leading-relaxed">
+                                          {item.detail}
+                                        </p>
+                                      </CardContent>
+                                    </Card>
+                                  </motion.li>
+                                ))}
+                              </ul>
+                            </motion.div>
+                          )
+                        })()}
+                      </AnimatePresence>
+                    </div>
+                  </div>
                 </div>
                 <div className="mt-12">
                   <div className="text-center mb-8">
