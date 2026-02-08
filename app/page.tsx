@@ -469,6 +469,20 @@ export default function Home() {
                         </div>
                       </CardContent>
                     </Card>
+                    <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
+                      <CardHeader>
+                        <CardTitle className="text-lg">교육이수</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
+                          클라우드 데브옵스 프론트엔드&백엔드 자바 풀스택 개발자 취업캠프 수료(총 약 960시간).
+                          {'\n'}
+                          Java 객체지향·Spring Boot·JSP/Servlet·MyBatis 백엔드, HTML/CSS/JavaScript·React 프론트엔드, MySQL·SQL/PL-SQL 데이터베이스, AWS(EC2·S3·Route53)·Linux·DevOps(젠킨스·Terraform)·MSA 이론 및 실습 수강.
+                          {'\n'}
+                          MSA 기반 커피 매장관리 서비스·클라우드 기반 디지털교육 통합 플랫폼(LMS·입학지원·학사관리) 실무 프로젝트 2회 수행.
+                        </p>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
                 <div className="mt-12">
