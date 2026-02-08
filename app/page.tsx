@@ -255,11 +255,11 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-14 sm:h-16 gap-2 min-w-0">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-xl font-bold text-foreground cursor-pointer"
+              className="text-sm sm:text-xl font-bold text-foreground cursor-pointer shrink-0"
               onClick={() => setCurrentPage('home')}
             >
               고범주
@@ -267,6 +267,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
+              className="min-w-0 shrink"
             >
               <GooeyNav
                 items={navItems}

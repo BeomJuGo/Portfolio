@@ -65,6 +65,24 @@
 .gooey-nav-container nav ul li a {
   display: inline-block;
   padding: 0.6em 1em;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+/* Mobile: smaller nav, no effect clone (fix doubled text) */
+@media (max-width: 640px) {
+  .gooey-nav-container nav ul {
+    gap: 0.5em;
+    padding: 0 0.25em;
+    font-size: 0.8125rem;
+  }
+  .gooey-nav-container nav ul li a {
+    padding: 0.4em 0.6em;
+  }
+  .gooey-nav-container .effect.text,
+  .gooey-nav-container .effect.filter {
+    display: none !important;
+  }
 }
 
 .gooey-nav-container nav ul li:focus-within:has(:focus-visible) {
