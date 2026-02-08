@@ -408,7 +408,7 @@ export default function Home() {
                   <Separator className="mx-auto w-24 mb-6" />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-12">
-                  <div className="flex justify-center">
+                  <div className="flex flex-col items-center gap-2">
                     <ProfileCard
                       avatarUrl="/profile.png"
                       name="고범주"
@@ -418,6 +418,9 @@ export default function Home() {
                       contactText="연락하기"
                       showUserInfo={false}
                     />
+                    <p className="text-[11px] sm:text-xs text-muted-foreground/80 text-center max-w-[280px]">
+                      어두운 화면 모드 강제 적용 시 카드가 어둡게 보일 수 있습니다. 라이트 모드 사용을 권장합니다.
+                    </p>
                   </div>
                   <div className="space-y-6">
                     <Card className="w-full border-2 bg-background/80 backdrop-blur-sm">
