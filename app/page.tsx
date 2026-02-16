@@ -79,6 +79,7 @@ export default function Home() {
       fullDescription: 'Spring Boot와 React를 활용한 풀스택 헬스케어 플랫폼입니다. 사용자들이 건강한 라이프스타일을 유지할 수 있도록 다양한 기능을 제공합니다. JWT 기반 인증 시스템을 통해 안전한 사용자 관리를 구현했으며, 트레이너와 사용자를 매칭하여 개인 맞춤형 운동 및 식단 플랜을 제공합니다. AI 기반 트레이너 추천 시스템을 통해 사용자에게 최적의 식단 및 운동방법을 알려주며, 실시간 채팅 기능으로 트레이너와의 소통을 지원합니다. 커뮤니티 기능을 통해 사용자들이 운동 경험과 정보를 공유할 수 있으며, 리뷰 시스템을 통해 트레이너에 대한 평가를 남길 수 있습니다. 또한, 관리자 페이지를 통해 플랫폼 전체를 관리할 수 있습니다',
       techStack: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'React', 'Vite', 'MySQL', 'PostgreSQL', 'Tailwind CSS', 'Shadcn UI', 'GSAP', 'FullCalendar', 'Cloudinary', 'Flyway'],
       githubUrl: 'https://github.com/BeomJuGo/Health-site',
+      demoUrl: 'https://health-site.vercel.app',
       features: [
         '사용자 인증 및 권한 관리 시스템',
         '트레이너 매칭 시스템 - 사용자가 원하는 트레이너를 매칭',
@@ -121,6 +122,7 @@ export default function Home() {
       fullDescription: '공장 현장에서 비상 음성(구조요청, 비명 등)과 이상 소음을 실시간으로 감지하는 풀스택 프로젝트입니다. Spring Boot 백엔드, React 프론트엔드, Python ML 서비스로 구성되어 있으며, Mel Spectrogram 기반 CNN 모델로 7가지 클래스(비명, 구조요청, 비상, 배경소음, 공장소음, 도로소음, 정상)를 분류합니다. 마이크 설정, 구역별 모니터링, 이벤트·알림 관리, 시스템 상태 대시보드를 제공하며, 웹소켓을 통한 실시간 오디오 스트리밍과 AI 예측 결과를 연동합니다.',
       techStack: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'React', 'Python', 'Flask', 'TensorFlow', 'Keras', 'MySQL', 'WebSocket'],
       githubUrl: 'https://github.com/BeomJuGo/factory-main',
+      demoUrl: 'https://factory-main.vercel.app',
       features: [
         '실시간 음성/소음 감지 - 마이크 입력 기반 24시간 모니터링',
         'AI 분류 모델 - CNN 기반 7-class 음성 분류 (비명, 구조요청, 비상 등)',
