@@ -96,23 +96,42 @@ export default function Home() {
     'pc-site': {
       id: 'pc-site',
       title: 'GoodPricePC',
-      description: 'PC 부품 비교 및 AI 견적 추천 플랫폼',
-      fullDescription: 'React를 기반으로 제작된 PC 부품 비교 및 추천 웹 애플리케이션입니다. 사용자가 예산과 용도에 맞는 최적의 PC 구성을 찾을 수 있도록 AI 기반 견적 추천 시스템을 제공합니다. 8가지 주요 부품 카테고리(CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워)별로 상세한 정보를 제공하며, 실시간 가격 비교와 성능 데이터를 통해 사용자가 직접 품목을 확인하며 각 품목의 가격추이를 확인할 수 있습니다. 백엔드 API와 연동하여 수천 가지의 부품 조합을 분석하고, 호환성을 검증한 후 사용자에게 최적의 구성을 추천합니다. AI 전문가 평가 기능을 통해 각 빌드의 장단점과 추천사항을 제공하며, MongoDB를 이용하여 견적 데이터를 저장하여 나중에 다시 확인할 수 있습니다.',
-      techStack: ['React', 'React Router', 'Axios', 'Tailwind CSS', 'Shadcn UI', 'Recharts', 'JavaScript'],
+      description: 'PC 부품 비교 및 AI 견적 추천 풀스택 플랫폼',
+      fullDescription: 'React 프론트엔드와 Node.js/Express 백엔드로 구성된 PC 부품 비교·추천 풀스택 웹 애플리케이션입니다. Puppeteer를 활용한 다나와 실시간 크롤링으로 최신 부품 가격을 수집하고, OpenAI API와 MongoDB를 연동하여 가성비 최적 AI 견적을 제공합니다. 직접 견적 빌더(PC Builder)를 통해 8개 슬롯별 부품 선택과 실시간 호환성 체크가 가능하며, 가격 하락 TOP 10, 가성비순 기본 정렬, GitHub Actions 기반 주간 자동 갱신 등 다양한 기능을 갖춘 완성형 풀스택 서비스입니다.',
+      techStack: ['React', 'JavaScript', 'Node.js', 'Express', 'MongoDB', 'Puppeteer', 'OpenAI API', 'Tailwind CSS', 'Recharts', 'GitHub Actions', 'Vercel'],
       githubUrl: 'https://github.com/BeomJuGo/pc-site-frontend',
       demoUrl: 'https://pc-site-frontend.vercel.app',
       features: [
-        'AI 기반 PC 견적 추천 - 예산과 용도(게임용/작업용/사무용/가성비)에 맞는 최적 구성 추천',
-        '8가지 부품 카테고리 - CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워 상세 정보 제공',
-        '실시간 가격 비교 - 다양한 부품의 최신 가격 정보 제공',
-        '가격 추이 확인 - 각 부품의 가격추이 확인 가능',
-        '성능 데이터 및 벤치마크 - 부품별 성능 점수와 실제 사용 데이터',
-        '부품 호환성 검증 - CPU 소켓, 메모리 타입, 전력 소비, 케이스 폼팩터 자동 검증',
-        'AI 전문가 평가 - 각 빌드의 장점, 추천사항, 종합 평가 제공',
-        '다중 빌드 비교 - 가성비/균형/고성능 등 여러 옵션 제공 및 비교',
-        '견적 저장 기능 - localStorage를 통한 견적 데이터 저장 및 복원',
-        '부품 상세 정보 - 각 부품의 상세 스펙 및 성능 정보 확인',
-        '반응형 디자인 - 모바일, 태블릿, 데스크톱 모든 기기에서 최적화된 경험'
+        'AI 가성비 견적 추천 (V2) - 25개 예산 버튼(50만~300만), 가성비 극대화 OpenAI 분석',
+        'PC 견적 빌더 - 8개 슬롯 선택, 실시간 CPU/GPU/메인보드/메모리 호환성 체크',
+        '다나와 실시간 크롤링 - Puppeteer + @sparticuz/chromium으로 최신 가격 수집',
+        '가격 하락 TOP 10 - 최근 7~30일 기준 대비 하락률 순위 표시',
+        '8개 부품 카테고리 - CPU, GPU, 메모리, 메인보드, 저장장치, 케이스, 쿨러, 파워',
+        '가성비순 정렬 - CPU/GPU 카테고리 기본 정렬 (PassMark·3DMark ÷ 가격)',
+        '가격 추이 그래프 - 각 부품의 priceHistory 기반 Recharts 차트',
+        '호환성 자동 검증 - 소켓, DDR 규격, 폼팩터, 전력 소비 자동 체크',
+        'GitHub Actions 자동화 - 매주 AI 견적 캐시 갱신 (V1/V2 별도 워크플로우)',
+        '메인보드 허위매물 필터링 - 5만원 미만 비정상 가격 자동 제외',
+        '반응형 디자인 - 모바일, 태블릿, 데스크톱 최적화'
+      ]
+    },
+    'property-planner': {
+      id: 'property-planner',
+      title: '부동산 매물 답사 플래너',
+      description: '네이버 지도·AI 기반 부동산 답사 일정 계획 앱',
+      fullDescription: 'Next.js 16 풀스택으로 구축한 부동산 매물 답사 플래너입니다. 네이버 지도 API로 주소를 검색해 매물을 등록하고, TMAP API를 서버 프록시로 연동하여 도보·차량·대중교통 이동 시간을 계산합니다. 서울시 역사마스터 JSON(600여 역)으로 역세권 여부를 자동 판정하며, 전체 매물 간 거리 행렬도 자동으로 계산합니다. OpenAI gpt-5.5 스트리밍 API를 활용한 AI 답사 계획 생성 기능과 JWT 기반 회원 인증으로 MongoDB Atlas에 매물 데이터를 저장·복원하는 기능을 제공합니다.',
+      techStack: ['Next.js 16', 'TypeScript', 'MongoDB Atlas', 'JWT', 'OpenAI API', 'Naver Maps API', 'TMAP API', 'Vercel'],
+      githubUrl: 'https://github.com/BeomJuGo/property-planner',
+      demoUrl: 'https://property-planner-nine.vercel.app',
+      features: [
+        '네이버 지도 + 주소 검색으로 매물 위치 핀 등록',
+        'TMAP 도보·차량·대중교통 API — 서버 프록시로 API 키 보호',
+        '서울시 역사마스터 JSON(600+ 역) 기반 역세권 자동 판정',
+        '전체 매물 간 거리 행렬 자동 계산',
+        'OpenAI gpt-5.5 스트리밍 AI 답사 계획 생성',
+        'JWT 기반 회원가입·로그인·로그아웃',
+        'MongoDB Atlas 매물 데이터 저장·복원 (로그인 사용자)',
+        'Vercel 프로덕션 배포 — 전체 API 엔드포인트 정상 작동 확인'
       ]
     },
     'voice-detection': {
@@ -148,17 +167,6 @@ export default function Home() {
       projectType: 'Team',
     },
     {
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
-      title: 'PC Site',
-      subtitle: 'PC 관련 풀스택 프로젝트',
-      techStack: ['JavaScript', 'React', 'Node.js'],
-      videoUrl: '/videos/pc-site-demo.mp4',
-      borderColor: '#10B981',
-      gradient: 'linear-gradient(210deg, #10B981, #000)',
-      detailPageId: 'pc-site',
-      projectType: 'Personal',
-    },
-    {
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop',
       title: '음성감지 프로젝트',
       subtitle: '공장 안전 실시간 음성/소음 감지 시스템',
@@ -168,6 +176,27 @@ export default function Home() {
       gradient: 'linear-gradient(145deg, #ED4B5E, #000)',
       detailPageId: 'voice-detection',
       projectType: 'Team',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+      title: 'GoodPricePC',
+      subtitle: 'PC 부품 비교 및 AI 견적 추천 풀스택 플랫폼',
+      techStack: ['React', 'Node.js', 'MongoDB', 'OpenAI'],
+      videoUrl: '/videos/pc-site-demo.mp4',
+      borderColor: '#10B981',
+      gradient: 'linear-gradient(210deg, #10B981, #000)',
+      detailPageId: 'pc-site',
+      projectType: 'Personal',
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop',
+      title: '부동산 매물 답사 플래너',
+      subtitle: '네이버 지도·AI 기반 부동산 답사 계획 앱',
+      techStack: ['Next.js', 'MongoDB', 'OpenAI'],
+      borderColor: '#F59E0B',
+      gradient: 'linear-gradient(145deg, #F59E0B, #000)',
+      detailPageId: 'property-planner',
+      projectType: 'Personal',
     },
   ]
 
@@ -699,8 +728,8 @@ export default function Home() {
                       <div className="min-h-[600px]">
                         <ChromaGrid
                           items={personalProjects}
-                          columns={1}
-                          rows={personalProjects.length}
+                          columns={2}
+                          rows={Math.ceil(personalProjects.length / 2)}
                           radius={300}
                           onCardClick={handleProjectClick}
                         />
